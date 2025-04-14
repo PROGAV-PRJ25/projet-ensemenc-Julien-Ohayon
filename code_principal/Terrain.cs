@@ -1,17 +1,23 @@
 public abstract class Terrain
 {
-    public string TypeTerrain {get;}
     public double EauTerrain {get;set;}
     public int Numero {get;}
     private static int numeroSuivant = 1;
+    public List<Plante> Plants {get; set;}
+    private int taille = 5;
 
-    public Terrain (string TypeTerrain, double EauTerrain)
+    public Terrain (List<Plante> Plants)
     {
-        this.TypeTerrain=TypeTerrain;
-        this.EauTerrain=EauTerrain;
         Numero = numeroSuivant;
         numeroSuivant++;
+        this.Plants=Plants;
     }
 
+    public void Planter(Plante Semi)
+    {
 
+    }
+
+    //Semi.PlaceRequise
+    Semi.Espacement
 }
