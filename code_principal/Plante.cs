@@ -4,7 +4,7 @@ public abstract class Plante
 
     public string Nature {get;set;}     // anuelle ou vivace
     public string Saison {get;set;}     //de semis
-    public Terrain TerrainPref {get;set;}
+    public string TerrainPref {get;set;}
     public int Espacement {get;set;}
     public int PlaceRequise {get;set;}
     public int Vitesse {get;set;}

@@ -1,11 +1,11 @@
 public class PlanteAster : Plante
 {
-    public PlanteTulipe (string nom) : base (nom) {
+    public PlanteAster (string nom) : base (nom) {
         this.Nature = "annuelle";
         this.Saison = "printemps";
-        this.TerrainPref = TerrainTerre;
-        this.Espacement = 40;    //12 à 15 cm entre les bulbes
-        this.PlaceRequise = 0,25;  //m² par plant
+        this.TerrainPref = "terre";
+        this.Espacement = 2;    //12 à 15 cm entre les bulbes
+        this.PlaceRequise = 3;  
         this.Vitesse = 5;   //fleuri 5 mois après la plantation
         this.BesoinEau = 11;     //modéré+
         this.BesoinLumi = 75;     //soleil à mi-ombre
