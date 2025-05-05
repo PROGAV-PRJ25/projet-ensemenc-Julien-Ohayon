@@ -1,7 +1,6 @@
 public abstract class Plante
 {
-    public string NomPlante {get;set;}      // à enlever ?
-
+    public List<int[]> CoordPlante {get; set;}
     public string Nature {get;set;}     // anuelle ou vivace
     public string Saison {get;set;}     //de semis
     public string TerrainPref {get;set;}
@@ -17,9 +16,9 @@ public abstract class Plante
     public int NbPousses {get;set;}
     public int CondResp {get;set;}
 
-    public Plante(string nom)
+    public Plante(List<int[]> coord)
     {
-        this.NomPlante = nom;
+        this.CoordPlante = coord;
     }
 
     //public Carotte (string nom) : base (nom, string saison="hiver"...) { }
@@ -28,8 +27,7 @@ public abstract class Plante
 
     public override string ToString()
     {
-        string message = base.ToString()+$"\nNom : {NomPlante}\n";
-        message += $"Nature : {Nature}\n";
+        string message = base.ToString()+$"\nNom : {Nature}\n";
         message += $"Saison : {Saison}\n";
         message += $"Terrain préféré : {TerrainPref}\n";
         message += $"Espacement : {Espacement}\n";

@@ -1,6 +1,6 @@
 public class PlanteTulipe : Plante
 {
-    public PlanteTulipe (string nom) : base (nom) {
+    public PlanteTulipe (List<int[]> coord) : base (coord) {
         this.Nature = "vivace";
         this.Saison = "automne";
         this.TerrainPref = "argile";
