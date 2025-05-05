@@ -1,20 +1,12 @@
-public class ModeClassique : Simulation 
+public class ModeClassique : Mode 
 {
     public string Meteo {get;set;}
     public int Temperature {get;set;}
     public int Precipitation {get;set;}
-    public int tours =1;
-    private static int toursSuivant = 1;
-    public string Date {get;set;}
-    public enum Mois
-    {
-        Janvier=1, Fevrier=2, Mars=3, Avril=4, Mai=5, Juin=6, Juillet=7, Aout=8, Septembre=9, Octobre=10, Novembre=11, Decembre=12
-    }
     
-    public ModeClassique ()
+    
+    public ModeClassique () : base ()
     {
-        tours = toursSuivant;
-        toursSuivant++;
         this.Meteo=Meteo;
         this.Temperature=Temperature;
         this.Precipitation=Precipitation;
@@ -23,86 +15,88 @@ public class ModeClassique : Simulation
 
     public void ChangerMeteo()  //on change la méteo, les température et les précipitations en fonction des mois
     {
-        int dateNum = tours/12;
-        Date = (Mois)dateNum;
-        if (Date=="Janvier")
+        if (Simulation.Date=="Janvier")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Nuage";
+            Temperature=4;
+            Precipitation=65;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Fevrier")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Pluie fine";
+            Temperature=4;
+            Precipitation=50;
         }
-        if (Date=="Mars")
+        if (Simulation.Date=="Mars")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Nuage";
+            Temperature=6;
+            Precipitation=50;
         }
-        if (Date=="Avril")
+        if (Simulation.Date=="Avril")
         {
-            Meteo="";
+            Meteo="Soleil";
             Temperature=10;
-            Precipitation=5;
+            Precipitation=40;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Mai")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Nuage";
+            Temperature=13;
+            Precipitation=60;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Juin")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Nuage";
+            Temperature=16;
+            Precipitation=65;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Juillet")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Pluie";
+            Temperature=18;
+            Precipitation=80;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Août")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Pluie";
+            Temperature=18;
+            Precipitation=85;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Septembre")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Soleil";
+            Temperature=15;
+            Precipitation=75;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Octobre")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Nuage";
+            Temperature=11;
+            Precipitation=70;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Novembre")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Pluie";
+            Temperature=7;
+            Precipitation=65;
         }
-        if (Date=="Fevrier")
+        if (Simulation.Date=="Décembre")
         {
-            Meteo="";
-            Temperature=10;
-            Precipitation=5;
+            Meteo="Neige";
+            Temperature=4;
+            Precipitation=70;
         }
     }
 
-    public override string ToString()
+    public void SimulerClassique()
     {
-        string message = $"\nMode Classique \n Mois : {Date}, Météo : {Meteo}, Température : {Temperature}°C, Préipitation : {Precipitation}cm";
+        ChangerMeteo();
+        string message = $"\nMode Classique \n Météo : {Meteo}, Température : {Temperature}°C, Préipitation : {Precipitation}mm";
+        Console.WriteLine(message);
+        for (int i=0;i<2;i++)
+        {
+            AfficherAction();
+        }
         
-        return message;
     }
-}

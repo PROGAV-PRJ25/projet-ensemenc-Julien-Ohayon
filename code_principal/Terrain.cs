@@ -16,7 +16,7 @@ public abstract class Terrain
         {
             for(int j=0;j<taille;j++)
             {
-                tableau[i,j]=".";
+                tableau[i,j]="+";
             }
         }
     }
@@ -65,7 +65,7 @@ public abstract class Terrain
 
     public void Planter(Plante Semi)
     {
-        if(PouvoirP)
+        if(PouvoirPlanter==true)
         
         tableau
     }

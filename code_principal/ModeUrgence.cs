@@ -1,6 +1,17 @@
-public class ModeUrgence : Simulation 
+public class ModeUrgence : Mode
 {
-    int 
     
-    public ModeClassique ()
+    public ModeClassique () : base(){}
+
+    SimulerUrgence()
+    {
+        
+    }
+    public override string ToString()
+    {
+        string message = $"\nMode Urgence";
+        message += "\ncause de l'urgence"
+        
+        return message;
+    }
 }
