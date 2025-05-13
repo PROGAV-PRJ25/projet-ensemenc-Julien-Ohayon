@@ -1,3 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!🚨");
-int i = 2;
+﻿//test instance tulipe
+//PlanteTulipe t1 = new PlanteTulipe("première tulipe");
+//Console.WriteLine(t1);
+
+
