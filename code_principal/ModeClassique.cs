@@ -5,7 +5,7 @@ public class ModeClassique : Simulation
     public string Meteo {get;set;}
     public int Temperature {get;set;}
     public int Precipitation {get;set;}
-    public int tours =1;
+    public int tours = 1;
     private static int toursSuivant = 1;
     public string Date {get;set;}
     public enum Mois
@@ -22,6 +22,19 @@ public class ModeClassique : Simulation
         this.Temperature=Temperature;
         this.Precipitation=Precipitation;
         ChangerMeteo();
+    }
+
+    public Terrain TrouverTerrain(int nbCible)      //faire pareil pour les plantes
+    {
+        foreach (Terrain elem in Terrains)
+        {
+            if (elem.Numero==nbCible)
+            {
+                return elem;
+            }
+            
+        }
+        return null;
     }
 
     public void ChangerMeteo()  //on change la méteo, les température et les précipitations en fonction des mois
@@ -48,7 +61,7 @@ public class ModeClassique : Simulation
         terrain.EauTerrain += 5;
     }
 
-    public void AfficherAction()    //le joueur peut faire 2 actions max
+    public void AfficherAction()    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
     {
         
         bool nombreOk = false;
@@ -86,7 +99,14 @@ public class ModeClassique : Simulation
         
         if(action==1)   //on sème une plante sur un terrain
         {
-
+            //afficher quelle plante peut être plantée où
+            //si on fait d'autres plantes, demander laquelle planter, puis adapter les overide de semer
+            Console.WriteLine("Choisissez le numéro du terrain sur lequel vous souhaitez semer :"); //à afficher, correspond au Numéro du terrain
+            int numTerrain = Convert.ToInt32(Console.ReadLine());  
+            Terrain choisi = TrouverTerrain(numTerrain);
+            choisi.Semer();
+            //appeller semer sur le terrain choisi
+            //do choisir numTerrain while TrouverTerrain return null 
         }
 
         if(action==2)   //on arrose tout un terrain (pour taux d'humidité), dans terrain

@@ -1,5 +1,5 @@
 ﻿//test instance tulipe
-//PlanteTulipe t1 = new PlanteTulipe("première tulipe");
+//PlanteTulipe tulipe1 = new PlanteTulipe("première tulipe");
 //Console.WriteLine(t1);
 
 

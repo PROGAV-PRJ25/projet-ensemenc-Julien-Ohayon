@@ -61,16 +61,39 @@ public abstract class Terrain
             }
         }
     }
+*/
 
-
-    public void Planter(Plante Semi)
+    public int EtreEntier(int min,int max)  //pour vérifier que l'utilisateur entre les coordonnées d'une case qui existe, adapter min et max selon la taille de nos terrains
     {
-        if(PouvoirP)
-        
-        tableau
+        bool nombreOk = false;
+        string stringNombre;
+        int nombre;
+        bool validation = true;
+
+        do  //test si le nombre est compris entre les valeurs souhaitées
+        {
+            do  //test si l'utilisateur entre un entier
+            {
+                if (validation == false)
+                {
+                    Console.WriteLine("Erreur : réessayez");
+                } 
+                Console.WriteLine($"Entrez un nombre entier compris entre {min} et {max} :");
+                stringNombre = Console.ReadLine()!;
+                nombreOk = int.TryParse(stringNombre, out int numericValue);
+                validation = false;
+            }
+            while (nombreOk == false);
+            nombre = Convert.ToInt32(stringNombre);
+        }
+        while (nombre<min || nombre>max);
+        return nombre;
+    } 
+    public abstract void Semer()
+    {
+      //comment gérer la place requise ?        
     }
 
-    Semi.PlaceRequise
-    */
+
 
 }
