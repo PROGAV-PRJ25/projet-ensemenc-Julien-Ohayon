@@ -4,11 +4,13 @@ public abstract class Terrain
     public int Numero {get;}
     private static int numeroSuivant = 1;
     public List<Plante> Plants {get; set;}
-    private int taille = 5;
-    public string [,] tableau = new string [taille,taille];
+    private static int taille;
+    public string [,] Tableau {get;set;}
 
     public Terrain (List<Plante> Plants)
     {
+        taille = 5;
+        this.Tableau = new string [taille,taille];
         Numero = numeroSuivant;
         numeroSuivant++;
         this.Plants=Plants;
@@ -16,7 +18,7 @@ public abstract class Terrain
         {
             for(int j=0;j<taille;j++)
             {
-                tableau[i,j]="+";
+                Tableau[i,j]="+";
             }
         }
     }

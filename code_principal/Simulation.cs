@@ -1,8 +1,15 @@
 public class Simulation 
 {
-    
     public int tours =1;
-    public string Date = "Janvier";
+    public Mois Date;
+    private static Dictionary<string,Mode> modeDispo = new Dictionary<string, Mode>
+    {
+        {"Classique", new ModeClassique()},
+        {"Urgence", new ModeUrgence()}
+    };   
+
+
+    private Mode modeEnCours;
     public enum Mois
     {
         Janvier=1, Fevrier=2, Mars=3, Avril=4, Mai=5, Juin=6, Juillet=7, Aout=8, Septembre=9, Octobre=10, Novembre=11, Decembre=12
@@ -11,6 +18,7 @@ public class Simulation
     public Simulation (List<Terrain> Terrains)
     {
         this.Terrains=Terrains;
+        modeEnCours=modeDispo.GetValueOrDefault("Classique") ?? new ModeClassique();
     } 
 
     public void Simuler(int nbTours)
@@ -18,37 +26,37 @@ public class Simulation
         Console.WriteLine("Consignes blablabla, vous pouvez faire 2 actions par tours");
         int dateNum = tours/12;
         Date = (Mois)dateNum;
-        Random rnd = new Random();
 
         for(int i=1;i<=nbTours;i++)
         {
-            int x = rnd.Next(1,8);
+            
             Console.WriteLine($"Tours n°{tours}, Mois : {Date}");
-            ModeClassique.SimulerClassique();
-            if (x==1)
+            modeEnCours.Simuler();
+            if (Mode.evenementActuel==Mode.Evenement.Urgence)
             {
-                ModeUrgence.SimulerUrgence();
+                modeEnCours =modeDispo.GetValueOrDefault("Urgence") ?? new ModeUrgence();
+                modeEnCours.Simuler();
             }
             AfficherTerrain();
             tours++;
         }
+        
     }
     void AfficherTerrain()
     {       
-        foreach Terrain terrain in Terrains 
+        foreach Terrain terrain in Terrains
         {
+            Console.WriteLine($"\nTerrain : {terrain.Numero}\n");
             for(int i=0;i<taille;i++)
             {
                 for (int j=0;j<taille;j++)
                 {
-                    if (terrain.tableau[i,j]=="+" || terrrain.tableau[i,j]==" ")
+                    if (terrain.Tableau[i,j]=="+" || terrain.Tableau[i,j]==" ")
                     {
-                        Console.Write($" {terrain.tableau[i,j]} ");
+                        Console.Write($" {terrain.Tableau[i,j]} ");
                     }
                     else
-                    Console.Write($"{terrain.tableau[i,j]} ");
-
-                    
+                    Console.Write($"{terrain.Tableau[i,j]} ");
                 }
                 Console.Write("");
                 Console.WriteLine();

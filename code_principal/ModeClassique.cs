@@ -1,9 +1,8 @@
 public class ModeClassique : Mode 
 {
-    public string Meteo {get;set;}
+    public string ? Meteo {get;set;}
     public int Temperature {get;set;}
-    public int Precipitation {get;set;}
-    
+    public int Precipitation {get;set;}    
     
     public ModeClassique () : base ()
     {
@@ -89,14 +88,36 @@ public class ModeClassique : Mode
         }
     }
 
-    public void SimulerClassique()
+    public override void Simuler()
     {
         ChangerMeteo();
         string message = $"\nMode Classique \n Météo : {Meteo}, Température : {Temperature}°C, Préipitation : {Precipitation}mm";
         Console.WriteLine(message);
+        Random rnd = new Random();
+        int x = rnd.Next(1,8);      // choisi si c'est une bonne fée, obstacles ou obstacles d'urgence
+        if (x<=3)
+        {
+           int l = Enum.GetValues(typeof(BonnesFees)).Length;
+           int y = rnd.Next(1,l+1);
+           ObsBF=(BonnesFees)y;
+        }
+        else if (x<=6)
+        {
+            int l = Enum.GetValues(typeof(Obstacles)).Length;
+            int y = rnd.Next(1,l+1);
+        }
+        else
+        {
+            int l = Enum.GetValues(typeof(ObstaclesUrgence)).Length;
+            int y = rnd.Next(1,l+1);
+            evenementActuel=Evenement.Urgence;
+        }
+
         for (int i=0;i<2;i++)
         {
-            AfficherAction();
+            Agir();
         }
+
         
     }
+}

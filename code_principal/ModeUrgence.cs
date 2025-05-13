@@ -1,17 +1,17 @@
 public class ModeUrgence : Mode
 {
-    
-    public ModeClassique () : base(){}
-
-    SimulerUrgence()
+    public string EvenementDeclancheur {get;set;}
+    public ModeUrgence() : base()
     {
-        
+        this.EvenementDeclancheur=EvenementDeclancheur;
     }
-    public override string ToString()
+
+    public override void Simuler()
     {
         string message = $"\nMode Urgence";
-        message += "\ncause de l'urgence"
-        
-        return message;
+        message += $"\ncause de l'urgence : {EvenementDeclancheur}";
+        Console.WriteLine(message);
+        evenementActuel=Evenement.Classique;
     }
+    
 }
