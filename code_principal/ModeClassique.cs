@@ -99,15 +99,45 @@ public class ModeClassique : Simulation
         
         if(action==1)   //on sème une plante sur un terrain
         {
+            bool terrainOk = false;
+            string strNumTerrain;
+            int numTerrain;
+            bool trouve = true;
+            Terrain choisi;
+
             //afficher quelle plante peut être plantée où
-            //si on fait d'autres plantes, demander laquelle planter, puis adapter les overide de semer
+            //si on fait d'autres plantes, demander laquelle planter, puis adapter les override de semer
             Console.WriteLine("Choisissez le numéro du terrain sur lequel vous souhaitez semer :"); //à afficher, correspond au Numéro du terrain
-            int numTerrain = Convert.ToInt32(Console.ReadLine());  
-            Terrain choisi = TrouverTerrain(numTerrain);
-            choisi.Semer();
-            //appeller semer sur le terrain choisi
-            //do choisir numTerrain while TrouverTerrain return null 
+
+            do  //test si le nombre est compris entre les valeurs souhaitées
+            {
+                do  //test si l'utilisateur entre un entier
+                {
+                    if (trouve == false)
+                    {
+                        Console.WriteLine("Erreur : réessayez");
+                    }
+
+                    strNumTerrain = Console.ReadLine()!;
+                    terrainOk = int.TryParse(strNumTerrain, out int numericValue);
+                    trouve = false;
+
+                } while (terrainOk == false);
+
+                numTerrain = Convert.ToInt32(strNumTerrain);
+
+            } while (numTerrain<1 || numTerrain>3 );     //adapter les chiffres selon la taille de nos terrains
+            
+            foreach (Terrain elem in Terrains)      //grâe aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
+            {
+                if (elem.Numero==numTerrain)
+                {
+                    choisi = elem;
+                    choisi.Semer();
+                }            
+            }
         }
+
 
         if(action==2)   //on arrose tout un terrain (pour taux d'humidité), dans terrain
         {
