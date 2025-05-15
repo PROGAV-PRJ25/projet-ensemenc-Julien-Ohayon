@@ -24,7 +24,7 @@ public class ModeClassique : Simulation
         ChangerMeteo();
     }
 
-    public Terrain TrouverTerrain(int nbCible)      //faire pareil pour les plantes
+    /*public Terrain TrouverTerrain(int nbCible)      //faire pareil pour les plantes
     {
         foreach (Terrain elem in Terrains)
         {
@@ -36,6 +36,7 @@ public class ModeClassique : Simulation
         }
         return null;
     }
+    */
 
     public void ChangerMeteo()  //on change la méteo, les température et les précipitations en fonction des mois
     {
@@ -128,7 +129,7 @@ public class ModeClassique : Simulation
 
             } while (numTerrain<1 || numTerrain>3 );     //adapter les chiffres selon la taille de nos terrains
             
-            foreach (Terrain elem in Terrains)      //grâe aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
+            foreach (Terrain elem in Terrains)      //grâce aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
             {
                 if (elem.Numero==numTerrain)
                 {

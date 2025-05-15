@@ -4,7 +4,7 @@ public abstract class Terrain
     public int Numero {get;}
     private static int numeroSuivant = 1;
     public List<Plante> Plants {get; set;}
-    private int taille = 5;
+    private static int taille = 5;      //doit être static pour faire un tableau avec ces dimensions
     public string [,] tableau = new string [taille,taille];
 
     public Terrain (List<Plante> Plants)
@@ -89,10 +89,14 @@ public abstract class Terrain
         while (nombre<min || nombre>max);
         return nombre;
     } 
-    public abstract void Semer()
-    {
-      //comment gérer la place requise ?        
-    }
+
+    public abstract bool PouvoirPlanter(List<int[]> cases);      //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison 
+    //case dispo si point 
+        //pour voir si elles sont bien côte à côte, on regarde si toutes les lignes ou (exclusif) toutes les colonnes sont les mêmes et si leurs numéros se suivent
+    public abstract void Semer();      //comment gérer la place requise ?        
+
+    
+    
 
 
 
