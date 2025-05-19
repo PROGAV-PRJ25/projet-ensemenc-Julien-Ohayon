@@ -54,6 +54,66 @@ public class ModeClassique : Simulation
             Temperature=10;
             Precipitation=5;
         }
+        if (Date=="Mars")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Avril")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Fevrier")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Fevrier")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Fevrier")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Fevrier")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Fevrier")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Fevrier")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Fevrier")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
+        if (Date=="Fevrier")
+        {
+            Meteo="";
+            Temperature=10;
+            Precipitation=5;
+        }
     }
 
     public void Arroser(Terrain terrain)
