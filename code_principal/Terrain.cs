@@ -4,8 +4,8 @@ public abstract class Terrain
     public int Numero {get;}
     private static int numeroSuivant = 1;
     public List<Plante> Plants {get; set;}
-    private static int taille;
-    public string [,] Tableau {get;set;}
+    private static int taille = 5;      //doit être static pour faire un tableau avec ces dimensions
+    public string [,] tableau = new string [taille,taille];
 
     public Terrain (List<Plante> Plants)
     {
@@ -63,15 +63,43 @@ public abstract class Terrain
             }
         }
     }
+*/
 
-
-    public void Planter(Plante Semi)
+    public int EtreEntier(int min,int max)  //pour vérifier que l'utilisateur entre les coordonnées d'une case qui existe, adapter min et max selon la taille de nos terrains
     {
-        if(PouvoirPlanter==true)
-        
-        tableau
-    }
+        bool nombreOk = false;
+        string stringNombre;
+        int nombre;
+        bool validation = true;
 
-    Semi.PlaceRequise
-    */
+        do  //test si le nombre est compris entre les valeurs souhaitées
+        {
+            do  //test si l'utilisateur entre un entier
+            {
+                if (validation == false)
+                {
+                    Console.WriteLine("Erreur : réessayez");
+                } 
+                Console.WriteLine($"Entrez un nombre entier compris entre {min} et {max} :");
+                stringNombre = Console.ReadLine()!;
+                nombreOk = int.TryParse(stringNombre, out int numericValue);
+                validation = false;
+            }
+            while (nombreOk == false);
+            nombre = Convert.ToInt32(stringNombre);
+        }
+        while (nombre<min || nombre>max);
+        return nombre;
+    } 
+
+    public abstract bool PouvoirPlanter(List<int[]> cases);      //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison 
+    //case dispo si point 
+        //pour voir si elles sont bien côte à côte, on regarde si toutes les lignes ou (exclusif) toutes les colonnes sont les mêmes et si leurs numéros se suivent
+    public abstract void Semer();      //comment gérer la place requise ?        
+
+    
+    
+
+
+
 }
