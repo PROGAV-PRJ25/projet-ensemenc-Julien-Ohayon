@@ -25,7 +25,6 @@ public abstract class Plante
 
     public Plante(List<int[]> coord)
     {
-        this.NomPlante = nom;
         this.CoordPlante = coord;
     }
 
