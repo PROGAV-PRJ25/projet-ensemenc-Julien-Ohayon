@@ -4,7 +4,6 @@ public class PlanteJacinthe : Plante
         this.Nature = "vivace";
         this.Saison = "automne";
         this.TerrainPref = "sable";
-        this.Espacement = 1;    //12 à 15 cm entre les bulbes
         this.PlaceRequise = 2;  
         this.Vitesse = 5;   //fleuri 5 mois après la plantation
         this.BesoinEau = 10;     //modéré

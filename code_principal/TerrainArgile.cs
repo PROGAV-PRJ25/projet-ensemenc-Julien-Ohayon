@@ -27,36 +27,36 @@ public class TerrainArgile : Terrain
             //si dispo false, pas besoin de regarder l'espacement : soit on parcourt une fois la liste, soit 2
 
             //on regarde si la case en dessous existe, puis si elle est libre 
-            if (elem[0] + 1 < taille)
+            if (elem[0] + Plante.espacement  < taille)
             {
-                if (tableau[elem[0] + 1, elem[1]] != "+") //(ou x si on les met ensuite)
+                if (tableau[elem[0] + Plante.espacement, elem[1]] != "+") //(ou x si on les met ensuite)
                 {
                     espaceBas = false;
                 }
             }
 
             //on regarde si la case au dessus existe, puis si elle est libre 
-            if (elem[0] - 1 >= 0)
+            if (elem[0] - Plante.espacement >= 0)
             {
-                if (tableau[elem[0] - 1, elem[1]] != "+") //(ou x si on les met ensuite)
+                if (tableau[elem[0] - Plante.espacement, elem[1]] != "+") //(ou x si on les met ensuite)
                 {
                     espaceHaut = false;
                 }
             }
 
             //on regarde si la case à droite existe, puis si elle est libre 
-            if (elem[1] + 1 < taille)
+            if (elem[1] + Plante.espacement < taille)
             {
-                if (tableau[elem[0], elem[1] + 1] != "+") //(ou x si on les met ensuite)
+                if (tableau[elem[0], elem[1] + Plante.espacement] != "+") //(ou x si on les met ensuite)
                 {
                     espaceDroite = false;
                 }
             }  
             
             //on regarde si la case à gauche existe, puis si elle est libre 
-            if (elem[1] - 1 >= 0)
+            if (elem[1] - Plante.espacement >= 0)
             {
-                if (tableau[elem[0], elem[1] - 1] != "+") //(ou x si on les met ensuite)
+                if (tableau[elem[0], elem[1] - Plante.espacement] != "+") //(ou x si on les met ensuite)
                 {
                     espaceGauche = false;
                 }

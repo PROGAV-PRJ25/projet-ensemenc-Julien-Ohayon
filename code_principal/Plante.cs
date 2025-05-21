@@ -4,7 +4,7 @@ public abstract class Plante
     public string Nature {get;set;}     // anuelle ou vivace
     public string Saison {get;set;}     //de semis
     public string TerrainPref {get;set;}
-    public int Espacement {get;set;}
+    public static int espacement = 1;
     public int PlaceRequise {get;set;}
     public int Vitesse {get;set;}
     public int BesoinEau {get;set;}

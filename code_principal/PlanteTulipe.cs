@@ -4,7 +4,6 @@ public class PlanteTulipe : Plante
         this.Nature = "vivace";
         this.Saison = "automne";
         this.TerrainPref = "argile";
-        this.Espacement = 1;    //10 à 15 cm entre les bulbes
         this.PlaceRequise = 1;  
         this.Vitesse = 5;   //fleuri 5 mois après la plantation
         this.BesoinEau = 10;     //modéré
