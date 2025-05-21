@@ -10,23 +10,16 @@ public class ModeUrgence : Mode
         Console.WriteLine($"Cause de l'urgence : {ObsBFActif}");
         for (int i = 1; i < 4; i++)
         {
-            Console.WriteLine($"Dégradation des terrains en temps réels : h{i}...");
-            foreach (Terrain terrain in terrains)
+            Console.WriteLine($"Dégradation des terrains en temps réel : h{i}...");
+            foreach (Terrain terrain in terrains)   //afficher que terrain urgence 
             {
                 terrain.Afficher();
             }
-            Thread.Sleep(2000); //freeze de 2sec
+            Thread.Sleep(3000); //freeze de 2sec
             Console.Clear();
             AgirObstaclesUrg(ObsBFActif);
 
-            Console.WriteLine($"Dégradation des terrains en temps réels : h{i}...");
-            foreach (Terrain terrain in terrains)
-            {
-                terrain.Afficher();
-            }
-            Thread.Sleep(2000); //freeze de 2sec
-            Console.Clear();
-            AgirObstaclesUrg(ObsBFActif);
+            
         }
 
         //AfficherActionsUrgence()
@@ -65,7 +58,7 @@ public class ModeUrgence : Mode
                 MettreSerre();
                 break;
             case 2:
-                MettreEpouventail();
+                MettreEpouventail();    //a enlever 
                 break;
             case 3:
                 DonnerPotion(); //fonctions à mettre dans terrains avec un foreach pour tous les terrains de la simu ou dans la simu non ?

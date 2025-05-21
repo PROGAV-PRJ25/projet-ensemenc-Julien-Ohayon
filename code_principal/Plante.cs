@@ -14,7 +14,14 @@ public abstract class Plante
     public List<string> Maladies {get;set;}
     public int EsperanceVie {get;set;}  //du plant, en années
     public int NbPousses {get;set;}
-    public int CondResp {get;set;}
+
+    public int ScoreGlobal { get; set; }       //à calculer 
+    protected enum statutPlante
+    {
+        graine, jeunePousse, auTop, mourrante
+    }
+
+    //statut : enum ou 1=graine , 2 = jeune pousse, 3=
 
     public Plante(List<int[]> coord)
     {

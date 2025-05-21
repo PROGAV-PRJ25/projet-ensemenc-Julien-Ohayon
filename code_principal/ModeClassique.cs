@@ -71,6 +71,7 @@ public class ModeClassique : Mode
         {
             //AfficherActionsDispo();
             //Agir(terrains);
+            //AfficherTerrains
         }
 
     }
@@ -119,7 +120,7 @@ public class ModeClassique : Mode
                 terrain.Fertiliser();
                 break;
             case BonnesFees.Abeille:
-                terrain.Florir();
+                terrain.Fleurir();
                 break;
             case BonnesFees.Herisson:
                 terrain.Assainir();

@@ -17,15 +17,16 @@ public abstract class Mode
     }
     protected enum ActionsUrgence
     {
-        Serre=1, Epouventail, PotionMagique=3
+        Serre=1, Epouventail+2, PotionMagique=3
     }
     protected enum BonnesFees
     {
         VerDeTerre = 1, Abeille = 2, Hérisson = 3
     }
+    //actions classique ?? 
     public Mode()
     {
-        ObsBFActif="";
+        ObsBFActif = "";
     }
 
     public abstract void Simuler(List<Terrain> terrains);

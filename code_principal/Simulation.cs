@@ -42,17 +42,10 @@ public class Simulation
                 modeEnCours = modeDispo.GetValueOrDefault("Classique") ?? new ModeClassique();  //retour mode classique
             }
 
-            AfficherTerrain();
+            
             
         }
         
     }
-    void AfficherTerrain()
-    {       
-        foreach (Terrain terrain in Terrains)
-        {
-            terrain.Afficher();
-        }
-        
-    }
+    
 }

@@ -114,11 +114,42 @@ public abstract class Terrain
     public abstract bool PouvoirPlanter(List<int[]> cases);      //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison 
     //case dispo si point 
         //pour voir si elles sont bien côte à côte, on regarde si toutes les lignes ou (exclusif) toutes les colonnes sont les mêmes et si leurs numéros se suivent
-    public abstract void Semer();      //comment gérer la place requise ?        
+    public abstract void Semer();      //comment gérer la place requise ? 
 
-    
-    
+    public abstract void Fertiliser()
+    {
+        Console.WriteLine("Grâce aux vers de terre, votre terrain va être fertilisé !");
+    }
 
 
+    //fonctions abstract des bonnes fees
+    public abstract void Fleurir()
+    {
+        Console.WriteLine("Grâce aux abeilles, votre terrain va fleurir"):
+    }
+
+    public abstract void Assainir()
+    {
+        Console.WriteLine("Grâce aux hérissons, votre terrain est assaini !");
+    }
+
+    //fonction abstract des obstacles
+    public abstract void DetruirePlante()
+    {
+        Console.WriteLine("A cause de piétineurs, une partie de vos plantes sont écrasées..."):
+        //faire un random sur la liste de plante et supprimer plus ou moins de plantes
+    }
+
+    public abstract void Deranger()
+    {
+        Console.WriteLine("A cause des taupes, votre terrain a été dérangé...");
+        //en fonction du terrain ça dérange plus ou moins
+    }
+
+    public abstract void MangerGraine()
+    {
+        Console.WriteLine("A cause des taupes, votre terrain a été dérangé...");
+        //manger les plantes qui viennent d'être semées le mois dernier
+    }
 
 }
