@@ -6,7 +6,7 @@ public class TerrainSable : Terrain
         EauTerrain = 20;
     }
 
-        public override bool PouvoirPlanter(List<int[]> cases)
+    public override bool PouvoirPlanter(List<int[]> cases)
     {
         bool planter = false;
         bool aligne = false;
@@ -24,7 +24,7 @@ public class TerrainSable : Terrain
         
         foreach (int[] elem in cases)
         {
-            if(tableau[elem[0],elem[1]]!=".")   //on regarde chaque case de la liste, et si c'est pas un point sur le terrain, elle n'est pas dispo donc false
+            if(tableau[elem[0],elem[1]]!="+")   //on regarde chaque case de la liste, et si c'est pas un point sur le terrain, elle n'est pas dispo donc false
             {
                 dispo = false;
             }
