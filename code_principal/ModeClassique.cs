@@ -12,7 +12,7 @@ public class ModeClassique : Simulation
     {
         Janvier=1, Fevrier=2, Mars=3, Avril=4, Mai=5, Juin=6, Juillet=7, Aout=8, Septembre=9, Octobre=10, Novembre=11, Decembre=12
     }
-    public enum Actions {semer=1, arroser=2, recolter=3 }
+    public enum Actions {aucune=0, semer=1, arroser=2, recolter=3 }
     
     public ModeClassique ()
     {
