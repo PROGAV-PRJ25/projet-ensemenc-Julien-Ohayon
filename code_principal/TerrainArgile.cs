@@ -1,26 +1,71 @@
 public class TerrainArgile : Terrain
 {
-
+    //terrain des tulipes
     public TerrainArgile(List<Plante> Plants) : base(Plants)
     {
         EauTerrain = 80;
     }
 
-    public override bool PouvoirPlanter(List<int[]> cases)
+    public override bool PouvoirPlanter(List<int[]> cases)      //fonction à déplacer dans terrain
     {
         bool planter = false;
         bool dispo = true;
-        bool espace = true;
+        bool espaceHaut = true;
+        bool espaceBas = true;
+        bool espaceGauche = true;
+        bool espaceDroite = true;
+
 
         foreach (int[] elem in cases)
         {
-            if (tableau[elem[0], elem[1]] != ".")   //on regarde chaque case de la liste, et si c'est pas un point sur le terrain, elle n'est pas dispo donc false
+            //on regarde chaque case de la liste, et si c'est pas un plus sur le terrain, elle n'est pas dispo donc false
+            if (tableau[elem[0], elem[1]] != "+")
             {
                 dispo = false;
             }
+
+            //si dispo false, pas besoin de regarder l'espacement : soit on parcourt une fois la liste, soit 2
+
+            //on regarde si la case en dessous existe, puis si elle est libre 
+            if (elem[0] + 1 < taille)
+            {
+                if (tableau[elem[0] + 1, elem[1]] != "+") //(ou x si on les met ensuite)
+                {
+                    espaceBas = false;
+                }
+            }
+
+            //on regarde si la case au dessus existe, puis si elle est libre 
+            if (elem[0] - 1 >= 0)
+            {
+                if (tableau[elem[0] - 1, elem[1]] != "+") //(ou x si on les met ensuite)
+                {
+                    espaceHaut = false;
+                }
+            }
+
+            //on regarde si la case à droite existe, puis si elle est libre 
+            if (elem[1] + 1 < taille)
+            {
+                if (tableau[elem[0], elem[1] + 1] != "+") //(ou x si on les met ensuite)
+                {
+                    espaceDroite = false;
+                }
+            }  
+            
+            //on regarde si la case à gauche existe, puis si elle est libre 
+            if (elem[1] - 1 >= 0)
+            {
+                if (tableau[elem[0], elem[1] - 1] != "+") //(ou x si on les met ensuite)
+                {
+                    espaceGauche = false;
+                }
+            }
         }
 
-        if (dispo && espace) //on plante si la place requise et l'espacement sont vérifiés
+
+
+        if (dispo && espaceHaut && espaceBas && espaceGauche && espaceDroite) //on plante si la place requise et l'espacement sont vérifiés
         {
             planter = true;
         }
@@ -47,6 +92,6 @@ public class TerrainArgile : Terrain
 
     public override void Fertiliser()
     {
-        
+
     }
 }        

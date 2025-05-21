@@ -4,7 +4,7 @@ public class PlanteAster : Plante
         this.Nature = "annuelle";
         this.Saison = "printemps";
         this.TerrainPref = "terre";
-        this.Espacement = 2;    //12 à 15 cm entre les bulbes
+        this.Espacement = 1;    //12 à 15 cm entre les bulbes
         this.PlaceRequise = 3;  
         this.Vitesse = 5;   //fleuri 5 mois après la plantation
         this.BesoinEau = 11;     //modéré+
