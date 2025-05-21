@@ -4,23 +4,42 @@ public abstract class Terrain
     public int Numero {get;}
     private static int numeroSuivant = 1;
     public List<Plante> Plants {get; set;}
-    private static int taille = 5;      //doit être static pour faire un tableau avec ces dimensions
-    public string [,] tableau = new string [taille,taille];
+    public string[,] tableau;
+    public int taille;
 
     public Terrain (List<Plante> Plants)
     {
         taille = 5;
-        this.Tableau = new string [taille,taille];
+        tableau = new string[taille, taille];
         Numero = numeroSuivant;
         numeroSuivant++;
         this.Plants=Plants;
-        for(int i=0;i<taille;i++)
+        for (int i = 0; i < taille; i++)
         {
-            for(int j=0;j<taille;j++)
+            for (int j = 0; j < taille; j++)
             {
-                Tableau[i,j]="+";
+                tableau[i, j] = "+";
             }
         }
+    }
+    
+    public void Afficher()
+    {
+        Console.WriteLine($"\nTerrain : {Numero}\n");
+            for(int i=0;i<taille;i++)
+            {
+                for (int j=0;j<taille;j++)
+                {
+                    if (tableau[i,j]=="+" || tableau[i,j]==" ")
+                    {
+                        Console.Write($" {tableau[i,j]} ");
+                    }
+                    else
+                    Console.Write($"{tableau[i,j]} ");
+                }
+                Console.Write("");
+                Console.WriteLine();
+            }
     }
 
     /*public bool VerifierEspace(int x, int y, int espacement)
@@ -65,7 +84,7 @@ public abstract class Terrain
     }
 */
 
-    public int EtreEntier(int min,int max)  //pour vérifier que l'utilisateur entre les coordonnées d'une case qui existe, adapter min et max selon la taille de nos terrains
+    public int EtreEntier(int min, int max)  //pour vérifier que l'utilisateur entre les coordonnées d'une case qui existe, adapter min et max selon la taille de nos terrains
     {
         bool nombreOk = false;
         string stringNombre;
@@ -79,7 +98,7 @@ public abstract class Terrain
                 if (validation == false)
                 {
                     Console.WriteLine("Erreur : réessayez");
-                } 
+                }
                 Console.WriteLine($"Entrez un nombre entier compris entre {min} et {max} :");
                 stringNombre = Console.ReadLine()!;
                 nombreOk = int.TryParse(stringNombre, out int numericValue);
@@ -88,7 +107,7 @@ public abstract class Terrain
             while (nombreOk == false);
             nombre = Convert.ToInt32(stringNombre);
         }
-        while (nombre<min || nombre>max);
+        while (nombre < min || nombre > max);
         return nombre;
     } 
 
