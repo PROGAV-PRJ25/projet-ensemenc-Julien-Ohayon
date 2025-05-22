@@ -109,11 +109,77 @@ public abstract class Terrain
         }
         while (nombre < min || nombre > max);
         return nombre;
-    } 
+    }
 
-    public abstract bool PouvoirPlanter(List<int[]> cases);      //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison 
-    //case dispo si point 
+    //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison 
+    //virtual car vérifie que les cases soient juxtaposées si le joueur en entre plusieurs
+     
+    public virtual bool PouvoirPlanter(List<int[]> cases)      //fonction à déplacer dans terrain
+    {
+        bool planter = false;
+        bool dispo = true;
+        bool espaceHaut = true;
+        bool espaceBas = true;
+        bool espaceGauche = true;
+        bool espaceDroite = true;
+
+
+        foreach (int[] elem in cases)
+        {
+            //on regarde chaque case de la liste, et si c'est pas un plus sur le terrain, elle n'est pas dispo donc false
+            if (tableau[elem[0], elem[1]] != "+")
+            {
+                dispo = false;
+            }
+
+            //si dispo false, pas besoin de regarder l'espacement : soit on parcourt une fois la liste, soit 2
+
+            //on regarde si la case en dessous existe, puis si elle est libre 
+            if (elem[0] + Plante.espacement < taille)
+            {
+                if (tableau[elem[0] + Plante.espacement, elem[1]] != "+") //(ou x si on les met ensuite)
+                {
+                    espaceBas = false;
+                }
+            }
+
+            //on regarde si la case au dessus existe, puis si elle est libre 
+            if (elem[0] - Plante.espacement >= 0)
+            {
+                if (tableau[elem[0] - Plante.espacement, elem[1]] != "+") //(ou x si on les met ensuite)
+                {
+                    espaceHaut = false;
+                }
+            }
+
+            //on regarde si la case à droite existe, puis si elle est libre 
+            if (elem[1] + Plante.espacement < taille)
+            {
+                if (tableau[elem[0], elem[1] + Plante.espacement] != "+") //(ou x si on les met ensuite)
+                {
+                    espaceDroite = false;
+                }
+            }
+
+            //on regarde si la case à gauche existe, puis si elle est libre 
+            if (elem[1] - Plante.espacement >= 0)
+            {
+                if (tableau[elem[0], elem[1] - Plante.espacement] != "+") //(ou x si on les met ensuite)
+                {
+                    espaceGauche = false;
+                }
+            }
+        }
+
         //pour voir si elles sont bien côte à côte, on regarde si toutes les lignes ou (exclusif) toutes les colonnes sont les mêmes et si leurs numéros se suivent
+
+        if (dispo && espaceHaut && espaceBas && espaceGauche && espaceDroite) //on plante si la place requise et l'espacement sont vérifiés
+        {
+            planter = true;
+        }
+
+        return planter;
+    }
     public abstract void Semer();      //comment gérer la place requise ? 
 
     public abstract void Fertiliser()
