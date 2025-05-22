@@ -1,7 +1,8 @@
 public abstract class Plante
 {
     public List<int[]> CoordPlante {get; set;}
-    public string Nature {get;set;}     // anuelle ou vivace
+    public string Affichage { get; set; }
+    public string Nature { get; set; }     // anuelle ou vivace
     public string Saison {get;set;}     //de semis
     public string TerrainPref {get;set;}
     public static int espacement = 1;
@@ -22,7 +23,12 @@ public abstract class Plante
         graine, jeunePousse, auTop, mourrante
     }
 
+    public statutPlante etat = statutPlante.graine;     //toujours une graine au début
+
+
     //statut : enum ou 1=graine , 2 = jeune pousse, 3=
+
+    public abstract void ChangerAffichage();  //ou juste console writeline ??
 
     public Plante(List<int[]> coord)
     {

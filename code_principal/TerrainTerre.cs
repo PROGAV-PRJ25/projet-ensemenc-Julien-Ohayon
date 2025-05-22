@@ -1,6 +1,6 @@
 public class TerrainTerre : Terrain
 {
-
+    //terrain des asters
     public TerrainTerre (List<Plante> Plants) : base(Plants)
     {
         EauTerrain = 50;

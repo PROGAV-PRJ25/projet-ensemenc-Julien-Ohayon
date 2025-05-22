@@ -5,8 +5,12 @@ public class TerrainArgile : Terrain
     {
         EauTerrain = 80;
     }
-
     
+    //on ne peut planter que des tulipes, qui prennent qu'une seule case donc toutes les cases entrées par l'utilisateur sont forcément alignées
+    public override bool VerifierAlign(List<int[]> cases)
+    {
+        return true;
+    }
     public override void Semer()
     {
         int ligne;
