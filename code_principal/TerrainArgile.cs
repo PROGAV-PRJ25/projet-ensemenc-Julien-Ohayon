@@ -24,8 +24,5 @@ public class TerrainArgile : Terrain
 
     }
 
-    public override void Fertiliser()
-    {
-
-    }
+    
 }        

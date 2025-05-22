@@ -17,7 +17,7 @@ public class ModeClassique : Mode
         {"Septembre",("Soleil",15,75)},
         {"Octobre",("Nuage",11,70)},
         {"Novembre",("Pluie",7,65)},
-        {"Decembre",("Neige",4,70)}
+        {"Décembre",("Neige",4,70)}
     };
 
     private List<string> moisOrdre = new List<string>
@@ -66,7 +66,7 @@ public class ModeClassique : Mode
         terrain.EauTerrain += 5;
     }
 
-    public void AfficherAction()    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
+    public void AfficherAction(List<Terrain> terrains)    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
     {
         
         bool nombreOk = false;
@@ -133,7 +133,7 @@ public class ModeClassique : Mode
 
             } while (numTerrain<1 || numTerrain>3 );     //adapter les chiffres selon la taille de nos terrains
             
-            foreach (Terrain elem in Terrains)      //grâce aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
+            foreach (Terrain elem in terrains)      //grâce aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
             {
                 if (elem.Numero==numTerrain)
                 {
@@ -160,85 +160,67 @@ public class ModeClassique : Mode
     {
 
         Console.WriteLine($"\nMode Classique - Mois : {Date} \n Météo : {Meteo}, Température : {Temperature}°C, Précipitation : {Precipitation}mm");
-        ChoisirEvent();
+        ChoisirEvent(terrains);
         Console.WriteLine($"La bonne fée ou l'obstacle est :  {ObsBFActif}");
 
         for (int i = 0; i < 2; i++)
         {
-            //AfficherActionsDispo();
-            //Agir(terrains);
+            AfficherAction(terrains);
             //AfficherTerrains
         }
 
     }
 
-    public void ChoisirEvent(List<Terrain> terrains)
+     public void ChoisirEvent(List<Terrain> terrains)
     {
-        Random rnd = new Random();
-        
-        int nbrTerrains = terrains.Count;       //choisi aléatoire du terrain sur lequel va être l'obstacle ou la bonne fée
-        int numAlea = rnd.Next(1,nbrTerrains + 1)
-        Terrain terrainTrouve = null;
-        foreach (Terrain t in terrains)
-        {
-            if (t.Numero == numeroRecherche)
-            {
-                terrainTrouve = t;
-            }
-        }
+        Terrain terrainTrouve = ChoisirAleaTerrain(terrains);
+    
 
         int x = rnd.Next(1, 8);      // choisir si c'est une bonne fée, obstacles ou obstacles d'urgence
         if (x <= 3)
         {
-            int y = rnd.Next(1, Enum.GetValues(typeof(BonnesFees)).Length + 1);
-            ObsBFActif = ((BonnesFees)y).ToString();
-            AgirBonnesFees(ObsBFActif, terrainTrouve);
+            int y = rnd.Next(0,2);  //sinon mettre avec les (int) et les trucs qui correspondent 
+            ObsBFActif = (ObsBF)y;
+            AgirBonnesFee(ObsBFActif, terrainTrouve);
         }
         else if (x <= 6)
         {
-            int y = rnd.Next(1, Enum.GetValues(typeof(Obstacles)).Length + 1);
-            ObsBFActif = ((Obstacles)y).ToString();
+            int y = rnd.Next(2,4);
+            ObsBFActif = (ObsBF)y;
             AgirObstacles(ObsBFActif, terrainTrouve);
         }
         else
         {
-            int y = rnd.Next(1, Enum.GetValues(typeof(ObstaclesUrgence)).Length + 1);
-            ObsBFActif = ((ObstaclesUrgence)y).ToString();
+            int y = rnd.Next(4,6);
+            ObsBFActif = (ObsBF)y;
             evenementActuel = Evenement.Urgence;
         }
     }
-
-    public void AgirBonnesFee(BonnesFees bf, Terrain terrain)   //si on choisit de le faire sur un terrain particulier
+    
+    public void AgirBonnesFee(ObsBF bf, Terrain terrain)   //si on choisit de le faire sur un terrain particulier
     {
         switch (bf)
         {
-            case BonnesFees.VerDeTerre:
+            case ObsBF.VerDeTerre:
                 terrain.Fertiliser();
                 break;
-            case BonnesFees.Abeille:
+            case ObsBF.Abeille:
                 terrain.Fleurir();
-                break;
-            case BonnesFees.Herisson:
-                terrain.Assainir();
                 break;
         }
     }
 
-    public void AgirObstacles(Obstacles obs, Terrain terrain)   //si on choisit de le faire sur un terrain particulier
+    public void AgirObstacles(ObsBF obs, Terrain terrain)   //si on choisit de le faire sur un terrain particulier
     {
         switch (obs)
         {
-            case Obstacles.Pietineur:
+            case ObsBF.Pietineur:
                 terrain.DetruirePlante();
                 break;
-            case Obstacles.Taupe:
-                terrain.Deranger();
-                break;
-            case Obstacles.Oiseaux:
+            case ObsBF.Oiseaux:
                 terrain.MangerGraine();
                 break;
         }
     }
-
 
 }

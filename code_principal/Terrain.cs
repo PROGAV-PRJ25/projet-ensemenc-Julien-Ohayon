@@ -5,18 +5,17 @@ public abstract class Terrain
     private static int numeroSuivant = 1;
     public List<Plante> Plants {get; set;}
     public string[,] tableau;
-    public int taille;
+    public int Taille { get; } = 5;
 
     public Terrain (List<Plante> Plants)
     {
-        taille = 5;
-        tableau = new string[taille, taille];
+        tableau = new string[Taille, Taille];
         Numero = numeroSuivant;
         numeroSuivant++;
         this.Plants=Plants;
-        for (int i = 0; i < taille; i++)
+        for (int i = 0; i < Taille; i++)
         {
-            for (int j = 0; j < taille; j++)
+            for (int j = 0; j < Taille; j++)
             {
                 tableau[i, j] = "+";
             }
@@ -26,9 +25,9 @@ public abstract class Terrain
     public void Afficher()
     {
         Console.WriteLine($"\nTerrain : {Numero}\n");
-            for(int i=0;i<taille;i++)
+            for(int i=0;i<Taille;i++)
             {
-                for (int j=0;j<taille;j++)
+                for (int j=0;j<Taille;j++)
                 {
                     if (tableau[i,j]=="+" || tableau[i,j]==" ")
                     {
@@ -135,7 +134,7 @@ public abstract class Terrain
             //si dispo false, pas besoin de regarder l'espacement : soit on parcourt une fois la liste, soit 2
 
             //on regarde si la case en dessous existe, puis si elle est libre 
-            if (elem[0] + Plante.espacement < taille)
+            if (elem[0] + Plante.espacement < Taille)
             {
                 if (tableau[elem[0] + Plante.espacement, elem[1]] != "+") //(ou x si on les met ensuite)
                 {
@@ -153,7 +152,7 @@ public abstract class Terrain
             }
 
             //on regarde si la case à droite existe, puis si elle est libre 
-            if (elem[1] + Plante.espacement < taille)
+            if (elem[1] + Plante.espacement < Taille)
             {
                 if (tableau[elem[0], elem[1] + Plante.espacement] != "+") //(ou x si on les met ensuite)
                 {
@@ -182,39 +181,40 @@ public abstract class Terrain
     }
     public abstract void Semer();      //comment gérer la place requise ? 
 
-    public abstract void Fertiliser()
+    public void Envoler()
+    {
+
+    }
+
+    public void Mourir()
+    {
+        
+    }
+
+    public void Fertiliser()
     {
         Console.WriteLine("Grâce aux vers de terre, votre terrain va être fertilisé !");
     }
 
 
     //fonctions abstract des bonnes fees
-    public abstract void Fleurir()
+    public void Fleurir()
     {
-        Console.WriteLine("Grâce aux abeilles, votre terrain va fleurir"):
+        Console.WriteLine("Grâce aux abeilles, votre terrain va fleurir");
     }
 
-    public abstract void Assainir()
-    {
-        Console.WriteLine("Grâce aux hérissons, votre terrain est assaini !");
-    }
 
     //fonction abstract des obstacles
-    public abstract void DetruirePlante()
+    public void DetruirePlante()
     {
-        Console.WriteLine("A cause de piétineurs, une partie de vos plantes sont écrasées..."):
+        Console.WriteLine("A cause de piétineurs, une partie de vos plantes sont écrasées...");
         //faire un random sur la liste de plante et supprimer plus ou moins de plantes
     }
 
-    public abstract void Deranger()
-    {
-        Console.WriteLine("A cause des taupes, votre terrain a été dérangé...");
-        //en fonction du terrain ça dérange plus ou moins
-    }
 
-    public abstract void MangerGraine()
+    public void MangerGraine()
     {
-        Console.WriteLine("A cause des taupes, votre terrain a été dérangé...");
+        Console.WriteLine("A cause des oiseaux, votre terrain a été dérangé...");
         //manger les plantes qui viennent d'être semées le mois dernier
     }
 

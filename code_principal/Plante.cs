@@ -37,7 +37,7 @@ public abstract class Plante
         string message = base.ToString()+$"\nNom : {Nature}\n";
         message += $"Saison : {Saison}\n";
         message += $"Terrain préféré : {TerrainPref}\n";
-        message += $"Espacement : {Espacement}\n";
+        message += $"Espacement : {espacement}\n";
         message += $"Place requise : {PlaceRequise}\n";
         message += $"Vitesse de croissance : {Vitesse}\n";
         message += $"Besoin en eau : {BesoinEau}\n";
