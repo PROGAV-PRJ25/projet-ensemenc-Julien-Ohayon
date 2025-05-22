@@ -39,9 +39,9 @@ public abstract class Terrain
     public void Afficher()
     {
         Console.WriteLine($"\nTerrain : {Numero}\n");
-        for (int i = 0; i < taille; i++)
+        for (int i = 0; i < Taille; i++)
         {
-            for (int j = 0; j < taille; j++)
+            for (int j = 0; j < Taille; j++)
             {
                 if (tableau[i, j] == "+" || tableau[i, j] == " ")
                 {
