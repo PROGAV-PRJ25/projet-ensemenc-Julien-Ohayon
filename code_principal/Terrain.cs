@@ -21,24 +21,38 @@ public abstract class Terrain
             }
         }
     }
+
+    //actualise le contenu du tableau du terrain selon la liste des plantes
+    public void Actualiser()
+    {
+        foreach (Plante plante in Plants)   //pour chaque plante du terrain 
+        {
+            plante.ChangerAffichage();  //on met à jour l'affichage de la plante selon son état
+            foreach (int[] coord in plante.CoordPlante) //pour chaque case occupée par ces plantes
+            {
+                //on change la case correspondante du tableau en l'affichage de l'état de la plante
+                tableau[coord[0], coord[1]] = plante.Affichage;
+            }
+        }
+    }
     
     public void Afficher()
     {
         Console.WriteLine($"\nTerrain : {Numero}\n");
-            for(int i=0;i<Taille;i++)
+        for (int i = 0; i < taille; i++)
+        {
+            for (int j = 0; j < taille; j++)
             {
-                for (int j=0;j<Taille;j++)
+                if (tableau[i, j] == "+" || tableau[i, j] == " ")
                 {
-                    if (tableau[i,j]=="+" || tableau[i,j]==" ")
-                    {
-                        Console.Write($" {tableau[i,j]} ");
-                    }
-                    else
-                    Console.Write($"{tableau[i,j]} ");
+                    Console.Write($" {tableau[i, j]} ");
                 }
-                Console.Write("");
-                Console.WriteLine();
+                else
+                    Console.Write($"{tableau[i, j]} ");
             }
+            Console.Write("");
+            Console.WriteLine();
+        }
     }
 
     /*public bool VerifierEspace(int x, int y, int espacement)
@@ -110,10 +124,8 @@ public abstract class Terrain
         return nombre;
     }
 
-    //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison 
-    //virtual car vérifie que les cases soient juxtaposées si le joueur en entre plusieurs
-     
-    public virtual bool PouvoirPlanter(List<int[]> cases)      //fonction à déplacer dans terrain
+    //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison      
+    public bool PouvoirPlanter(List<int[]> cases)      //fonction à déplacer dans terrain
     {
         bool planter = false;
         bool dispo = true;
@@ -179,7 +191,26 @@ public abstract class Terrain
 
         return planter;
     }
-    public abstract void Semer();      //comment gérer la place requise ? 
+    //vérifie que les cases entrées par l'utilisateur soient alignées, virtual car seul le terrain argile n'a pas besoin de vérifier et retourne true (une seule case sera demandée à l'utilisateur)
+    public virtual bool VerifierAlign(List<int[]> cases)
+    {
+        bool alignees = false;
+        int ligneComp = (cases[0])[0];  //on prend la ligne de la 1e case pour comparer les suivantes, sera définie, car la méthode n'est appelée qu'une fois la liste contruite
+        int colonneComp = (cases[0])[1];    //pareil pour colonnes
+
+        bool memeLigne = cases.All(c => c[0] == ligneComp); //vrai si toutes les cases de la liste ont le même n° de ligne
+        bool memeColonne = cases.All(c => c[1] == colonneComp); //vrai si toutes les cases de la liste ont le même n° de colonne
+
+        //ou exclusif car si toutes les lignes et toutes les colonnes sont les mêmes, il n'y a qu'une seule case
+        //si l'utilisateur a du entrer plusieurs cases, c'est que la plante en a besoin, donc le semis ne sera pas possible sinon
+        if (memeLigne ^ memeColonne)
+        {
+            alignees = true;
+        }
+
+        return alignees;
+    }
+    public abstract void Semer();
 
     public void Envoler()
     {
