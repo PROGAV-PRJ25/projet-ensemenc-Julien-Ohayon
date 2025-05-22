@@ -22,24 +22,38 @@ public abstract class Terrain
             }
         }
     }
+
+    //actualise le contenu du tableau du terrain selon la liste des plantes
+    public void Actualiser()
+    {
+        foreach (Plante plante in Plants)   //pour chaque plante du terrain 
+        {
+            plante.ChangerAffichage();  //on met à jour l'affichage de la plante selon son état
+            foreach (int[] coord in plante.CoordPlante) //pour chaque case occupée par ces plantes
+            {
+                //on change la case correspondante du tableau en l'affichage de l'état de la plante
+                tableau[coord[0], coord[1]] = plante.Affichage;
+            }
+        }
+    }
     
     public void Afficher()
     {
         Console.WriteLine($"\nTerrain : {Numero}\n");
-            for(int i=0;i<taille;i++)
+        for (int i = 0; i < taille; i++)
+        {
+            for (int j = 0; j < taille; j++)
             {
-                for (int j=0;j<taille;j++)
+                if (tableau[i, j] == "+" || tableau[i, j] == " ")
                 {
-                    if (tableau[i,j]=="+" || tableau[i,j]==" ")
-                    {
-                        Console.Write($" {tableau[i,j]} ");
-                    }
-                    else
-                    Console.Write($"{tableau[i,j]} ");
+                    Console.Write($" {tableau[i, j]} ");
                 }
-                Console.Write("");
-                Console.WriteLine();
+                else
+                    Console.Write($"{tableau[i, j]} ");
             }
+            Console.Write("");
+            Console.WriteLine();
+        }
     }
 
     /*public bool VerifierEspace(int x, int y, int espacement)
