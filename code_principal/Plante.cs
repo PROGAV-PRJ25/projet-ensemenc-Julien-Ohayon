@@ -15,7 +15,8 @@ public abstract class Plante
     public int EsperanceVie {get;set;}  //du plant, en années
     public int NbPousses {get;set;}
 
-    public int ScoreGlobal { get; set; }       //à calculer 
+    public int ScoreGlobal { get; set; }     
+    public int MoisRestant { get; set; }
     protected enum statutPlante
     {
         graine, jeunePousse, auTop, mourrante
@@ -26,6 +27,8 @@ public abstract class Plante
     public Plante(List<int[]> coord)
     {
         this.CoordPlante = coord;
+        ScoreGlobal = EsperanceVie;
+        MoisRestant = EsperanceVie;
     }
 
     //public Carotte (string nom) : base (nom, string saison="hiver"...) { }

@@ -97,18 +97,18 @@ public class ModeClassique : Mode
 
         } while (action<1 || action>3);
 
-        if(action==0)   //on ne fait rien
+        if (action == 0)   //on ne fait rien
         {
 
         }
-        
-        if(action==1)   //on sème une plante sur un terrain
+
+        else
         {
             bool terrainOk = false;
             string strNumTerrain;
             int numTerrain;
             bool trouve = true;
-            Terrain choisi;
+            Terrain choisi = null;
 
             //afficher quelle plante peut être plantée où
             //si on fait d'autres plantes, demander laquelle planter, puis adapter les override de semer
@@ -131,29 +131,39 @@ public class ModeClassique : Mode
 
                 numTerrain = Convert.ToInt32(strNumTerrain);
 
-            } while (numTerrain<1 || numTerrain>3 );     //adapter les chiffres selon la taille de nos terrains
-            
+            } while (numTerrain < 1 || numTerrain > 3);     //adapter les chiffres selon la taille de nos terrains
+
             foreach (Terrain elem in terrains)      //grâce aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
             {
-                if (elem.Numero==numTerrain)
+                if (elem.Numero == numTerrain)
                 {
                     choisi = elem;
-                    choisi.Semer();
-                }            
+                }
             }
+
+            if (choisi == null)     //un peu inutile car le cas arrivera pas
+            {
+                Console.WriteLine("Erreur : terrain introuvable.");
+                return;
+            }
+
+            if (action == 1)   //on sème une plante sur un terrain
+            {
+                choisi.Semer();
+            }
+
+
+            if (action == 2)   //on arrose tout un terrain (pour taux d'humidité), dans terrain
+            {
+                
+            }
+
+            if (action == 3)  //on récolte une seule plante, dans plante
+            {
+
+            }
+            //afficher l'action choisie, et l'appeler 
         }
-
-
-        if(action==2)   //on arrose tout un terrain (pour taux d'humidité), dans terrain
-        {
-
-        }
-        
-        if (action==3)  //on récolte une seule plante, dans plante
-        {
-
-        }
-        //afficher l'action choisie, et l'appeler 
     }
 
     public override void Simuler(List<Terrain> terrains)

@@ -1,6 +1,11 @@
 public class ModeUrgence : Mode
 {
 
+    public enum ActionsUrgence
+    {
+        Serre = 1, PotionMagique = 2
+    }
+
     public ModeUrgence() : base() { }
 
     public override void Simuler(List<Terrain> terrains)

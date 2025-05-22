@@ -11,7 +11,7 @@ public class PlanteTulipe : Plante
         this.TempMin = 10;
         this.TempMax = 18;
         this.Maladies = new List<string> {"botrytis", "pourriture grise", "virus de la mosaïque"};
-        this.EsperanceVie = 5; 
+        this.EsperanceVie = 60;     //en mois
         this.NbPousses = 1; //1tige florale par bulbe
 
      }

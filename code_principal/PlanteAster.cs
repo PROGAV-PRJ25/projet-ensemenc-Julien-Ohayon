@@ -11,7 +11,7 @@ public class PlanteAster : Plante
         this.TempMin = 15;
         this.TempMax = 25;
         this.Maladies = new List<string> {"oïdium", "pourriture", "rouille"};
-        this.EsperanceVie = 1; 
+        this.EsperanceVie = 12; //en mois 
         this.NbPousses = 10; //1tige florale par bulbe
 
      }

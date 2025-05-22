@@ -11,7 +11,7 @@ public class PlanteJacinthe : Plante
         this.TempMin = 12;
         this.TempMax = 18;
         this.Maladies = new List<string> {"fusariose", "pourriture", "mouches de bulbe"};
-        this.EsperanceVie = 3; 
+        this.EsperanceVie = 36;     //en mois   
         this.NbPousses = 1; //1tige florale par bulbe
 
      }
