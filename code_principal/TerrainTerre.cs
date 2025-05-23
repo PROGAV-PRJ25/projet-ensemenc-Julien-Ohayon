@@ -29,10 +29,9 @@ public class TerrainTerre : Terrain
         Console.WriteLine("Choisissez le numéro de la colonne de la 3e case sur laquelle vous souhaitez semer :");
         colonne3 = EtreEntier(1, 9);
 
-        //vérifier s'il y a la place de planter -> if PouvoirPlanter(ligne,colonne)==true
-        int[] coord1 = new int[] { ligne1, colonne1 };   //tableau des coordonnées de la 1e case
-        int[] coord2 = new int[] { ligne2, colonne2 };   //tableau des coordonnées de la 2e case
-        int[] coord3 = new int[] { ligne3, colonne3 };   //tableau des coordonnées de la 3e case
+        int[] coord1 = new int[] { ligne1 - 1, colonne1 - 1 };   //tableau des coordonnées de la 1e case
+        int[] coord2 = new int[] { ligne2 - 1, colonne2 - 1};   //tableau des coordonnées de la 2e case
+        int[] coord3 = new int[] { ligne3 - 1, colonne3 - 1};   //tableau des coordonnées de la 3e case
 
         List<int[]> casesChoisies = new List<int[]> { coord1, coord2, coord3 };
         if (VerifierAlign(casesChoisies) && PouvoirPlanter(casesChoisies))
@@ -52,7 +51,7 @@ public class TerrainTerre : Terrain
         {
             foreach (Plante p in Plants)
             {
-                p.ScoreGlobal = 6;     // toutes les plantes passent au score hauut de "au top"
+                p.ScoreGlobal = 6;     // toutes les plantes passent au score haut de "au top"
             }
             
         }

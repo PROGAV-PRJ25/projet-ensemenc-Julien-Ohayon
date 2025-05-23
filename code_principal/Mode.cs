@@ -1,6 +1,6 @@
 public abstract class Mode
 {
-    public enum ObsBF
+    public enum ObsBF   //les obstacles et les bonnes fées 
     {
         //bonnes fées
         VerDeTerre,
@@ -22,27 +22,27 @@ public abstract class Mode
     {
         Urgence, Classique
     }
+    public static Random rnd = new Random();
+
     public static Evenement evenementActuel = Evenement.Classique;  //au départ on est dans le mode classique
 
-    public Mode(){ }
-
-    public static readonly Random rnd = new Random();  //à voir la déf de readonly
+    public Mode(){ }    // constructeur
 
     public abstract void Simuler(List<Terrain> terrains);
 
-    public Terrain ChoisirAleaTerrain(List<Terrain> terrains)
+    protected Terrain ChoisirAleaTerrain(List<Terrain> terrains)   //choisit aléatoirement un terrain parmi une liste de terrains
     {
 
-        int nbrTerrains = terrains.Count;       //choisi aléatoire du terrain sur lequel va être l'obstacle ou la bonne fée
+        int nbrTerrains = terrains.Count; 
         int numAlea = rnd.Next(1, nbrTerrains + 1);
-        Terrain terrainTrouve = null;
+        Terrain? terrainTrouve = null;
         foreach (Terrain t in terrains)
-        {
-            if (t.Numero == numAlea)
             {
-                terrainTrouve = t;
+                if (t.Numero == numAlea)
+                {
+                    terrainTrouve = t;
+                }
             }
-        }
-        return terrainTrouve;   //jamais null car on a implémenté le numéro des terrains à partir de t1
+        return terrainTrouve!;   //jamais null car on a implémenté le numéro des terrains à partir de t1
     }
 }

@@ -46,7 +46,7 @@ public class TerrainSable : Terrain
     {
         foreach (Plante p in Plants)
         {
-            p.ScoreGlobal = 22;     // toutes les plantes passent au score hauut de "au top"
+            p.ScoreGlobal = 22;     // toutes les plantes passent au score haut de "au top"
         }
         
     }

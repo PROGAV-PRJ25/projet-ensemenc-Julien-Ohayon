@@ -3,7 +3,7 @@ public class ModeUrgence : Mode
 
     public enum ActionsUrgence
     {
-        Serre = 1, PotionMagique = 2
+        Reconstruction = 1, PotionMagique = 2
     }
 
     public ModeUrgence() : base() { }
@@ -12,26 +12,17 @@ public class ModeUrgence : Mode
     {
         Console.WriteLine($"Mode Urgence 🚨");
         Console.WriteLine($"Cause de l'urgence : {ObsBFActif}");
-
-        Terrain terrainChoisi = ChoisirAleaTerrain(terrains);
-
-        /*for (int i = 1; i < 4; i++)
-        {
-            Console.WriteLine($"Dégradation des terrains en temps réel : h{i}...");*/
-            
-            terrainChoisi.Afficher();
-            //Thread.Sleep(3000); //freeze de 2sec
-            //Console.Clear();
-            AgirObstaclesUrg(ObsBFActif, terrainChoisi);
-
-        //}
-
-        AgirActionUrgence(terrainChoisi);
+        Terrain terrainChoisi = ChoisirAleaTerrain(terrains);   //choix du terrain aléatoire
+        Console.WriteLine("Terrain avant l'obstacle d'urgence");
+        terrainChoisi.Afficher();
+        AgirObstaclesUrg(ObsBFActif, terrainChoisi);    //obstacle d'urgence qui agit
+        terrainChoisi.Afficher();
+        AgirActionUrgence(terrainChoisi);   //choix  par l'utilisateur et action de l'action d'urgence 
         terrainChoisi.Afficher();
         evenementActuel = Evenement.Classique;   //pour annoncer qu'on retourne mode classique
     }
 
-    public void AgirObstaclesUrg(ObsBF obs, Terrain terrain)
+    private void AgirObstaclesUrg(ObsBF obs, Terrain terrain)
     {
     
         switch (obs)
@@ -42,12 +33,11 @@ public class ModeUrgence : Mode
             case ObsBF.MaladieGrave:
                 terrain.TomberMalade();
                 break;
-        //default ?  
         }
                 
     }
 
-    public void AgirActionUrgence(Terrain terrainChoisi)    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
+    private void AgirActionUrgence(Terrain terrainChoisi)
     {
         
         bool nombreOk = false;
@@ -90,8 +80,5 @@ public class ModeUrgence : Mode
         }
 
     }
-    
-    
-
     
 }

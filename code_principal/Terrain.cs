@@ -13,8 +13,7 @@ public abstract class Terrain
         tableau = new string[Taille, Taille];
         Numero = numeroSuivant;
         numeroSuivant++;
-        this.Plants = Plants;
-        for (int i = 0; i < Taille; i++)
+        for (int i = 0; i < Taille; i++)    //remplissage initial du tableau
         {
             for (int j = 0; j < Taille; j++)
             {
@@ -32,15 +31,15 @@ public abstract class Terrain
             foreach (int[] coord in plante.CoordPlante) //pour chaque case occupée par ces plantes
             {
                 //on change la case correspondante du tableau en l'affichage de l'état de la plante
-                tableau[coord[0], coord[1]] = plante.Affichage;
+                tableau[coord[0], coord[1]] = plante.Affichage!;
             }
         }
     }
 
 
-    public void Afficher()
+    public void Afficher()  
     {
-        Actualiser();
+        Actualiser();   //on actualise le tableau avant de l'afficher
         Console.WriteLine($"\nTerrain : {Numero} - Pourcentage d'eau {EauTerrain}\n");
         for (int i = 0; i < Taille; i++)
         {
@@ -57,48 +56,6 @@ public abstract class Terrain
             Console.WriteLine();
         }
     }
-
-    /*public bool VerifierEspace(int x, int y, int espacement)
-    {
-        bool place= true;
-        for(int esp=1;esp<=espacement;esp++)
-        {
-            if (i-esp>=0)
-            {
-                if(tableau[])
-            }
-
-        }
-        return place;
-    }
-
-    public bool PouvoirPlanter(Semi.)
-    {
-        int place=0;
-        int espace=0;
-        
-        
-        for(int i=1;i<taille;i++)       //vérifier si on peut planter par ligne
-        {
-            for(int j=1;j<taille;j++)
-            {
-                while (place!=Semi.PlaceRequise && espace!=Semi.PlaceRequise)
-                {
-                    if(tableau[i,j]==".")
-                    {
-                        place+=1;
-                        if(VerifierEspace(i,j,Semi.Espacement)==true)
-                        espace+=1;
-                        else
-                        espace=0;
-                    }
-                    else
-                    place=0;
-                }
-            }
-        }
-    }
-*/
 
     public int EtreEntier(int min, int max)  //pour vérifier que l'utilisateur entre les coordonnées d'une case qui existe, adapter min et max selon la taille de nos terrains
     {
@@ -127,7 +84,7 @@ public abstract class Terrain
         return nombre;
     }
 
-    //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison      
+    //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur    
     public bool PouvoirPlanter(List<int[]> cases)
     {
         bool planter = false;
@@ -150,7 +107,7 @@ public abstract class Terrain
             //on regarde si la case en dessous existe, puis si elle est libre 
             if (elem[0] + Plante.espacement < Taille)
             {
-                if (tableau[elem[0] + Plante.espacement, elem[1]] != "+") //(ou x si on les met ensuite)
+                if (tableau[elem[0] + Plante.espacement, elem[1]] != "+") 
                 {
                     espaceBas = false;
                 }
@@ -159,7 +116,7 @@ public abstract class Terrain
             //on regarde si la case au dessus existe, puis si elle est libre 
             if (elem[0] - Plante.espacement >= 0)
             {
-                if (tableau[elem[0] - Plante.espacement, elem[1]] != "+") //(ou x si on les met ensuite)
+                if (tableau[elem[0] - Plante.espacement, elem[1]] != "+")
                 {
                     espaceHaut = false;
                 }
@@ -168,7 +125,7 @@ public abstract class Terrain
             //on regarde si la case à droite existe, puis si elle est libre 
             if (elem[1] + Plante.espacement < Taille)
             {
-                if (tableau[elem[0], elem[1] + Plante.espacement] != "+") //(ou x si on les met ensuite)
+                if (tableau[elem[0], elem[1] + Plante.espacement] != "+")
                 {
                     espaceDroite = false;
                 }
@@ -177,7 +134,7 @@ public abstract class Terrain
             //on regarde si la case à gauche existe, puis si elle est libre 
             if (elem[1] - Plante.espacement >= 0)
             {
-                if (tableau[elem[0], elem[1] - Plante.espacement] != "+") //(ou x si on les met ensuite)
+                if (tableau[elem[0], elem[1] - Plante.espacement] != "+")
                 {
                     espaceGauche = false;
                 }
@@ -191,6 +148,8 @@ public abstract class Terrain
 
         return planter;
     }
+
+
     //vérifie que les cases entrées par l'utilisateur soient alignées, virtual car seul le terrain argile n'a pas besoin de vérifier et retourne true (une seule case sera demandée à l'utilisateur)
     public virtual bool VerifierAlign(List<int[]> cases)
     {
@@ -210,7 +169,7 @@ public abstract class Terrain
 
         return alignees;
     }
-    public abstract void Semer();
+    public abstract void Semer();   //elle sera différente selon les terrains
 
     public void EnleverPlante(Plante plante)
     {
@@ -259,13 +218,13 @@ public abstract class Terrain
             Console.WriteLine("La plante a été cueillie !");
         }
 
-        return cueillette;
+        return cueillette!;
 
     }
 
-    public void Envoler()
+    public void Envoler()   //quand on a la tempête, on enlève une plante sur 2
     {
-        for (int i = Plants.Count - 1; i >= 0; i--)
+        for (int i = Plants.Count - 1; i >= 0; i--) //on commence par le dernier élément de la liste car dans l'autre sens si des éléments s'enlèvent, les index changent et on peut oublier des éléments
         {
             if (i % 2 == 0)
             {
@@ -274,49 +233,49 @@ public abstract class Terrain
         }
     }
 
-    public void TomberMalade()
+    public void TomberMalade()  //obstacle d'urgence
     {
         foreach (Plante p in Plants)
         {
-            p.ScoreGlobal = p.ScoreGlobal - p.EsperanceVie * 1 / 3;
+            p.ScoreGlobal = p.ScoreGlobal - p.EsperanceVie * 1 / 3; // chaque plante perd 1/3 de son score global initial
         }
     }
 
-    public void Reconstruire()
+    public void Reconstruire()  //action d'urgence
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)     //on permet de planter 3 plantes 
         {
             Semer();
         }
     }
 
-    public void DonnerPotion()
+    public void DonnerPotion()  //action d'urgence
     {
         foreach (Plante p in Plants)
         {
-            p.ScoreGlobal = p.ScoreGlobal + p.EsperanceVie * 1 / 4;
+            p.ScoreGlobal = p.ScoreGlobal + p.EsperanceVie * 1 / 4;     // la plante regagne 1/4 de son esperance de vie
         }
     }
 
-    public void Fertiliser()
+    public void Fertiliser()    //bonne fee --> ver de terre
     {
         Console.WriteLine("Grâce aux vers de terre, votre terrain va être fertilisé et vos plantes rajeunissent !");
         foreach (Plante p in Plants)
         {
-            p.ScoreGlobal = p.ScoreGlobal + p.EsperanceVie * 1 / 6;
+            p.ScoreGlobal = p.ScoreGlobal + p.EsperanceVie * 1 / 6;     
         }
 
     }
 
 
-    //fonctions abstract des bonnes fees
+    //méthode virtual des bonnes fees
     public virtual void Fleurir()
     {
         Console.WriteLine("Grâce aux abeilles, votre terrain va fleurir");
     }
 
 
-    //fonction abstract des obstacles
+    //méthode obstacles
     public void DetruirePlante()
     {
         Console.WriteLine("A cause de piétineurs, une partie de vos plantes sont écrasées...");
@@ -324,19 +283,19 @@ public abstract class Terrain
         {
             if (i % 4 == 0)
             {
-                EnleverPlante(Plants[i]);
+                EnleverPlante(Plants[i]);   //enlève une plante sur 4
             }
         }
     }
 
-    public void MangerGraine()
+    public void MangerGraine()  
     {
         Console.WriteLine("Les oiseaux ont mangé toutes les graines de votre terrain :/ ...");
         for (int i = Plants.Count - 1; i >=0;i--)
         {
             if (Plants[i].etat == Plante.statutPlante.graine)
             {
-                EnleverPlante(Plants[i]);
+                EnleverPlante(Plants[i]);   //enlève toutes les plantes sous forme de graine
             }
         }
     }

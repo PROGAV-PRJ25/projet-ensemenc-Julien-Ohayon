@@ -32,21 +32,8 @@ public class ModeClassique : Mode
         ChangerMeteo(1);
     }
 
-    /*public Terrain TrouverTerrain(int nbCible)      //faire pareil pour les plantes
-    {
-        foreach (Terrain elem in Terrains)
-        {
-            if (elem.Numero==nbCible)
-            {
-                return elem;
-            }
-            
-        }
-        return null;
-    }
-    */
 
-    public void ChangerMeteo(int tours)  //? //on change la méteo, les température et les précipitations en fonction des mois
+    public void ChangerMeteo(int tours)  //on change la méteo, les température et les précipitations en fonction des mois
     {
 
         int dateNum = (tours - 1) % 12;
@@ -60,19 +47,34 @@ public class ModeClassique : Mode
 
     }
 
-    public void Arroser(Terrain terrain)
+    public override void Simuler(List<Terrain> terrains)
+    {
+        Console.WriteLine($"\nMode Classique - Mois : {Date}\n Météo : {Meteo}, Température : {Temperature}°C, Précipitation : {Precipitation}mm");
+        AfficherTousTerrains(terrains);
+        Console.WriteLine("Vous pouvez effectuer 2 actions");
+        for (int i = 0; i < 2; i++)
+        {
+            Agir(terrains);
+            AfficherTousTerrains(terrains);
+        }
+        ChoisirEvent(terrains);     //choisit les obstacles ou les bonnes fées
+        Console.WriteLine($"La bonne fée ou l'obstacle est :  {ObsBFActif}");
+
+    }
+
+    public void Arroser(Terrain terrain)    //action
     {
         terrain.EauTerrain += 5;
         Console.WriteLine($"Le terrain {terrain.Numero} a été arrosé");
     }
 
-    public Terrain ChoisirTerrain()
+    private Terrain ChoisirTerrain(List<Terrain> terrains)     //on laisse l'utilisateur choisir le terrain de son choix 
     {
         bool terrainOk = false;
         string strNumTerrain;
         int numTerrain;
         bool trouve = true;
-        Terrain? choisi = null;
+        Terrain? choisi = null; //le terrain est juste null au tout début de la méthode
 
         Console.WriteLine("Choisissez le numéro du terrain sur lequel vous souhaitez effectuer l'action :"); //afficher les numéros afficher, correspond au Numéro du terrain
 
@@ -93,7 +95,7 @@ public class ModeClassique : Mode
 
             numTerrain = Convert.ToInt32(strNumTerrain);
 
-        } while (numTerrain < 1 || numTerrain > 3);     //adapter les chiffres selon nos terrains
+        } while (numTerrain < 1 || numTerrain > terrains.Count);   //comme on a initialisé le numéro du 1er terrain à 1 et qu'il augmente de 1 pour chaque élément de la liste
 
         //grâce aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
         foreach (Terrain elem in Simulation.Terrains)
@@ -103,10 +105,10 @@ public class ModeClassique : Mode
                 choisi = elem;
             }
         }
-        return choisi;
+        return choisi!; //on peut mettre ! car un terrain correspond forcément 
     }
 
-    public void Agir(List<Terrain> terrains)    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
+    private void Agir(List<Terrain> terrains)    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
     {
 
         bool nombreOk = false;
@@ -137,15 +139,12 @@ public class ModeClassique : Mode
 
         } while (action < 0 || action > 3);
 
-        if (action == 0)   //on ne fait rien
-        {
-
-        }
+        //si l'utilisateur a rentré 0, rien ne se passe
 
         if (action == 1)   //on sème une plante sur un terrain
         {
             //afficher quelle plante peut être plantée où
-            Terrain terrainChoisi = ChoisirTerrain();
+            Terrain terrainChoisi = ChoisirTerrain(terrains);
             //grâce aux vérifications de ChoisirTerrain, un terrain correspondra forcément et il sera unique
             terrainChoisi.Semer();
         }
@@ -153,68 +152,53 @@ public class ModeClassique : Mode
 
         if (action == 2)   //on arrose tout un terrain (pour taux d'humidité), dans terrain
         {
-            Terrain terrainChoisi = ChoisirTerrain();
+            Terrain terrainChoisi = ChoisirTerrain(terrains);
             Arroser(terrainChoisi);
         }
 
         if (action == 3)  //on récolte une seule plante, dans plante
         {
-            Terrain terrainChoisi = ChoisirTerrain();
+            Terrain terrainChoisi = ChoisirTerrain(terrains);
             terrainChoisi.Cueillir();
 
         }
     }
-
-    public override void Simuler(List<Terrain> terrains)
-    {
-        Console.WriteLine($"\nMode Classique - Mois : {Date}\n Météo : {Meteo}, Température : {Temperature}°C, Précipitation : {Precipitation}mm");
-        ChoisirEvent(terrains);
-        Console.WriteLine($"La bonne fée ou l'obstacle est :  {ObsBFActif}");
-        AfficherTousTerrains(terrains);
-        Console.WriteLine("Vous pouvez effectuer 2 actions");
-        for (int i = 0; i < 2; i++)
-        {
-            Agir(terrains);
-            AfficherTousTerrains(terrains);
-        }
-
-    }
-
+    
     private void AfficherTousTerrains(List<Terrain> terrains)
     {
         foreach (Terrain t in terrains)
         {
             t.Afficher();
-        }    
+        }
     }
-    public void ChoisirEvent(List<Terrain> terrains)
+    private void ChoisirEvent(List<Terrain> terrains)   //choisi aléatoirement les bonnes fées et les obstacles
     {
-        Terrain terrainTrouve = ChoisirAleaTerrain(terrains);
+        Terrain terrainTrouve = ChoisirAleaTerrain(terrains);       // choix aléatoire du terrain 
         Console.WriteLine($"Un évènement arrive sur votre terrain n°{terrainTrouve.Numero}");
 
 
         int x = rnd.Next(1, 8);      // choisir si c'est une bonne fée, obstacles ou obstacles d'urgence
-        if (x <= 3)
+        if (x <= 3)     // 3/8 chances de tomber sur une bonne fée
         {
-            int y = rnd.Next(0, 2);  //sinon mettre avec les (int) et les trucs qui correspondent 
+            int y = rnd.Next(0, 2);     // on choisit aléatoirement quel évènement va arriver parmi les bonnes fées
             ObsBFActif = (ObsBF)y;
             AgirBonnesFee(ObsBFActif, terrainTrouve);
         }
-        else if (x <= 6)
+        else if (x <= 6)    // 3/4 chances de tomber sur une bonne fée
         {
-            int y = rnd.Next(2, 4);
+            int y = rnd.Next(2, 4); 
             ObsBFActif = (ObsBF)y;
             AgirObstacles(ObsBFActif, terrainTrouve);
         }
-        else
+        else    // 1/8 chance de tomber sur un évènement qui déclenche le mode urgence
         {
-            int y = rnd.Next(4, 6);
+            int y = rnd.Next(4, 6);     
             ObsBFActif = (ObsBF)y;
-            evenementActuel = Evenement.Urgence;
+            evenementActuel = Evenement.Urgence;    //on va passer en mode urgence 
         }
     }
     
-    public void AgirBonnesFee(ObsBF bf, Terrain terrain)   //si on choisit de le faire sur un terrain particulier
+    public void AgirBonnesFee(ObsBF bf, Terrain terrain)  
     {
         switch (bf)
         {
@@ -227,7 +211,7 @@ public class ModeClassique : Mode
         }
     }
 
-    public void AgirObstacles(ObsBF obs, Terrain terrain)   //si on choisit de le faire sur un terrain particulier
+    public void AgirObstacles(ObsBF obs, Terrain terrain)  
     {
         switch (obs)
         {
