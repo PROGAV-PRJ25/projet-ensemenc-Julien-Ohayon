@@ -39,7 +39,7 @@ public class PlanteTulipe : Plante
         else
         {
             this.etat = statutPlante.graine;
-        }        
+        }
     }
     public override void ChangerAffichage()
     {

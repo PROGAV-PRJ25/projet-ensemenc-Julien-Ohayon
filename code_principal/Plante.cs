@@ -28,14 +28,16 @@ public abstract class Plante
 
     //statut : enum ou 1=graine , 2 = jeune pousse, 3=
 
-    public abstract void ChangerAffichage();  //ou juste console writeline ??
-
     public Plante(List<int[]> coord)
     {
         this.CoordPlante = coord;
         ScoreGlobal = EsperanceVie;
         MoisRestant = EsperanceVie;
     }
+
+    public abstract void ChangerAffichage();  //ou juste console writeline ??
+
+    
 
     //public Carotte (string nom) : base (nom, string saison="hiver"...) { }
 

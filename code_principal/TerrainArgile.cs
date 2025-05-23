@@ -27,6 +27,7 @@ public class TerrainArgile : Terrain
         if (VerifierAlign(casesChoisies) && PouvoirPlanter(casesChoisies))
         {
             PlanteTulipe tulipe = new PlanteTulipe(casesChoisies);
+            Plants.Add(tulipe);
             Console.WriteLine("Vous avez planté une tulipe !");
         }
         else

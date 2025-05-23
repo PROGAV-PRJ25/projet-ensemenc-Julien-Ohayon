@@ -38,6 +38,7 @@ public class TerrainTerre : Terrain
         if (VerifierAlign(casesChoisies) && PouvoirPlanter(casesChoisies))
         {
             PlanteAster aster = new PlanteAster(casesChoisies);
+            Plants.Add(aster);
             Console.WriteLine("Vous avez planté un aster !");
         }
         else

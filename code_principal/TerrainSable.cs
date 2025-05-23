@@ -31,7 +31,8 @@ public class TerrainSable : Terrain
         List<int[]> casesChoisies = new List<int[]> { coord1, coord2 };
         if (VerifierAlign(casesChoisies) && PouvoirPlanter(casesChoisies))
         {
-            PlanteJacinthe jacinthe = new PlanteJacinthe(casesChoisies);     
+            PlanteJacinthe jacinthe = new PlanteJacinthe(casesChoisies);   
+            Plants.Add(jacinthe);  
             Console.WriteLine("Vous avez planté une jacinthe !");
         }
         else
