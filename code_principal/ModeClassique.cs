@@ -64,7 +64,7 @@ public class ModeClassique : Mode
 
     public void Arroser(Terrain terrain)    //action
     {
-        terrain.EauTerrain += 5;
+        terrain.EauTerrain += 10;
         Console.WriteLine($"Le terrain {terrain.Numero} a été arrosé");
     }
 

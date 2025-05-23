@@ -34,7 +34,13 @@ public class Simulation
             if (modeEnCours is ModeClassique mc)  //sinon on ne peut pas appeler mode classique comme on aurait pu etre en mode urgence 
             {
                 mc.ChangerMeteo(i);
-                //Utiliser la fonction controler taux humidité
+                if (mc.Precipitation >= 65)
+                {
+                    foreach (Terrain terrain in Terrains)
+                    {
+                        terrain.EauTerrain -= 5;
+                    }
+                }       
             }
 
             modeEnCours.Simuler(Terrains);      //simulation  mode classique
