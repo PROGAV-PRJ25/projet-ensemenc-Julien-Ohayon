@@ -31,8 +31,6 @@ public abstract class Plante
     public Plante(List<int[]> coord)
     {
         this.CoordPlante = coord;
-        ScoreGlobal = EsperanceVie;
-        MoisRestant = EsperanceVie;
     }
 
     public abstract void ChangerAffichage();  //ou juste console writeline ??

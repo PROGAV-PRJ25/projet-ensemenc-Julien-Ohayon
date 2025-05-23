@@ -59,6 +59,7 @@ public class Simulation
                 if (p.MoisRestant == 0)     // si la plante a vécu toute son esperance de vie elle meurt dans tous lees cas 
                 {
                     p.ScoreGlobal = 0;
+                    t.EnleverPlante(p);
                 }
                 else
                 {

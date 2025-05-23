@@ -11,9 +11,11 @@ public class PlanteJacinthe : Plante
         this.BesoinLumi = 75;     //soleil à mi-ombre
         this.TempMin = 12;
         this.TempMax = 18;
-        this.Maladies = new List<string> {"fusariose", "pourriture", "mouches de bulbe"};
+        this.Maladies = new List<string> { "fusariose", "pourriture", "mouches de bulbe" };
         this.EsperanceVie = 36;     //en mois   
         this.NbPousses = 1; //1tige florale par bulbe
+        ScoreGlobal = EsperanceVie;
+        MoisRestant = EsperanceVie;
 
     }
     public override void ChangerEtat()

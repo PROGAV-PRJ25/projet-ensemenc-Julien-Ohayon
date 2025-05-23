@@ -235,7 +235,7 @@ public abstract class Terrain
 
         int[] coord = new int[] { ligne, colonne };
 
-        foreach (Plante plante in Plants)      //on reagrde chaque plante du terrain
+        foreach (Plante plante in Plants)      //on regarde chaque plante du terrain
         {
             //si on la trouve, il n'y en a qu'une sur cette case donc on l'enlève et on la retourne pour la mettre dans un panier
             if (plante.CoordPlante.Contains(coord))

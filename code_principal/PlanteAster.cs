@@ -12,9 +12,11 @@ public class PlanteAster : Plante
         this.BesoinLumi = 75;     //soleil à mi-ombre
         this.TempMin = 15;
         this.TempMax = 25;
-        this.Maladies = new List<string> {"oïdium", "pourriture", "rouille"};
+        this.Maladies = new List<string> { "oïdium", "pourriture", "rouille" };
         this.EsperanceVie = 12; //en mois 
         this.NbPousses = 10; //1tige florale par bulbe
+        ScoreGlobal = EsperanceVie;
+        MoisRestant = EsperanceVie;
 
     }
 
@@ -23,11 +25,12 @@ public class PlanteAster : Plante
         if (ScoreGlobal == 0)
         {
             this.etat = statutPlante.morte;
+    
         }
         else if (ScoreGlobal < 3)
-            {
-                this.etat = statutPlante.mourrante;
-            }
+        {
+            this.etat = statutPlante.mourrante;
+        }
         else if (ScoreGlobal < 7)
         {
             this.etat = statutPlante.auTop;
