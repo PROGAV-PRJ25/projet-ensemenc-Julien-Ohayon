@@ -23,11 +23,6 @@ public abstract class Mode
         Urgence, Classique
     }
     public static Evenement evenementActuel = Evenement.Classique;  //au départ on est dans le mode classique
-    
-    public enum ActionsUrgence
-    {
-        Serre = 1, PotionMagique = 2
-    }
 
     public Mode(){ }
 

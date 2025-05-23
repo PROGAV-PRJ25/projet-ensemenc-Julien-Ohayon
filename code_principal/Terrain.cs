@@ -7,8 +7,9 @@ public abstract class Terrain
     public string[,] tableau;
     public int Taille { get; } = 5;
 
-    public Terrain (List<Plante> Plants)
+    public Terrain ()
     {
+        Plants = new List<Plante>();
         tableau = new string[Taille, Taille];
         Numero = numeroSuivant;
         numeroSuivant++;
@@ -36,8 +37,10 @@ public abstract class Terrain
         }
     }
     
+
     public void Afficher()
     {
+        Actualiser();
         Console.WriteLine($"\nTerrain : {Numero}\n");
         for (int i = 0; i < Taille; i++)
         {
@@ -253,12 +256,33 @@ public abstract class Terrain
 
     public void Envoler()
     {
-
+        int i = 0;
+        foreach (Plante p in Plants)
+        {
+            if (i % 2 == 0)
+            {
+                //EnleverPlante(p);
+            }
+            i++;
+        }
     }
 
-    public void Mourir()
+    public void TomberMalade()
     {
-        
+        foreach (Plante p in Plants)
+        {
+            p.ScoreGlobal = p.ScoreGlobal - 0.25 * p.EsperanceVie;
+        }
+    }
+
+    public void MettreSerre()
+    {
+        //action à faire
+    }
+
+    public void DonnerPotion()
+    {
+
     }
 
     public void Fertiliser()

@@ -1,7 +1,7 @@
 public class TerrainTerre : Terrain
 {
     //terrain des asters
-    public TerrainTerre (List<Plante> Plants) : base(Plants)
+    public TerrainTerre () : base()
     {
         EauTerrain = 50;
     }

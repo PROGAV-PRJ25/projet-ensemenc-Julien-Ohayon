@@ -106,15 +106,15 @@ public class ModeClassique : Mode
         return choisi;
     }
 
-    public void AfficherAction(List<Terrain> terrains)    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
+    public void Agir(List<Terrain> terrains)    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
     {
 
         bool nombreOk = false;
         string stringNombre;
         int action;
         bool validation = true;
-
-        Console.WriteLine("Indiquez le numéro de l'action que vous souahitez effectuer :");
+        
+        Console.WriteLine("Indiquez le numéro de l'action que vous souhaitez effectuer :");
         Console.WriteLine("0 : pas d'action");
         Console.WriteLine("1 : semer");
         Console.WriteLine("2 : arroser");
@@ -167,39 +167,47 @@ public class ModeClassique : Mode
     public override void Simuler(List<Terrain> terrains)
     {
 
-        Console.WriteLine($"\nMode Classique - Mois : {Date} \n Météo : {Meteo}, Température : {Temperature}°C, Précipitation : {Precipitation}mm");
+        Console.WriteLine($"\nMode Classique - Mois : {Date}\n Météo : {Meteo}, Température : {Temperature}°C, Précipitation : {Precipitation}mm");
         ChoisirEvent(terrains);
         Console.WriteLine($"La bonne fée ou l'obstacle est :  {ObsBFActif}");
-
+        AfficherTousTerrains(terrains);
+        Console.WriteLine("Vous pouvez effectuer 2 actions");
         for (int i = 0; i < 2; i++)
         {
-            AfficherAction(terrains);
-            //AfficherTerrains
+            Agir(terrains);
+            AfficherTousTerrains(terrains);
         }
 
     }
 
-     public void ChoisirEvent(List<Terrain> terrains)
+    private void AfficherTousTerrains(List<Terrain> terrains)
+    {
+        foreach (Terrain t in terrains)
+        {
+            t.Afficher();
+        }    
+    }
+    public void ChoisirEvent(List<Terrain> terrains)
     {
         Terrain terrainTrouve = ChoisirAleaTerrain(terrains);
-    
+
 
         int x = rnd.Next(1, 8);      // choisir si c'est une bonne fée, obstacles ou obstacles d'urgence
         if (x <= 3)
         {
-            int y = rnd.Next(0,2);  //sinon mettre avec les (int) et les trucs qui correspondent 
+            int y = rnd.Next(0, 2);  //sinon mettre avec les (int) et les trucs qui correspondent 
             ObsBFActif = (ObsBF)y;
             AgirBonnesFee(ObsBFActif, terrainTrouve);
         }
         else if (x <= 6)
         {
-            int y = rnd.Next(2,4);
+            int y = rnd.Next(2, 4);
             ObsBFActif = (ObsBF)y;
             AgirObstacles(ObsBFActif, terrainTrouve);
         }
         else
         {
-            int y = rnd.Next(4,6);
+            int y = rnd.Next(4, 6);
             ObsBFActif = (ObsBF)y;
             evenementActuel = Evenement.Urgence;
         }

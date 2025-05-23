@@ -11,14 +11,37 @@ public class PlanteJacinthe : Plante
         this.BesoinLumi = 75;     //soleil à mi-ombre
         this.TempMin = 12;
         this.TempMax = 18;
-        this.Maladies = new List<string> { "fusariose", "pourriture", "mouches de bulbe" };
-        this.EsperanceVie = 3;
+        this.Maladies = new List<string> {"fusariose", "pourriture", "mouches de bulbe"};
+        this.EsperanceVie = 36;     //en mois   
         this.NbPousses = 1; //1tige florale par bulbe
 
     }
-    
+    public override void ChangerEtat()
+    {
+        if (ScoreGlobal == 0)
+        {
+            this.etat = statutPlante.morte;
+        }
+        else if (ScoreGlobal < 9)
+        {
+            this.etat = statutPlante.mourrante;
+        }
+        else if (ScoreGlobal < 23)
+        {
+            this.etat = statutPlante.auTop;
+        }
+        else if (ScoreGlobal < 35)
+        {
+            this.etat = statutPlante.jeunePousse;
+        }
+        else
+        {
+            this.etat = statutPlante.graine;
+        }        
+    }
     public override void ChangerAffichage()
     {
+        ChangerEtat();
         if (this.etat == statutPlante.graine)
         {
             Affichage = "🟢";

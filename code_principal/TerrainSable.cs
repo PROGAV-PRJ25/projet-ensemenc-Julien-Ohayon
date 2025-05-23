@@ -2,7 +2,7 @@ public class TerrainSable : Terrain
 {
     //terrain des jacinthes
 
-    public TerrainSable(List<Plante> Plants) : base(Plants)
+    public TerrainSable() : base()
     {
         EauTerrain = 20;
     }
