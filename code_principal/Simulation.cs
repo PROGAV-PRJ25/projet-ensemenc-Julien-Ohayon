@@ -21,10 +21,11 @@ public class Simulation
 
     public void Simuler(int nbTours)
     {
-        Console.WriteLine("Bienvenue jeune jardinier!\n Le jardin suivant est composé de plusieurs type de terrains : des terrains argileux, sableux et terreux qui peuvent respectivement accueillir des tulipes, des jacinthes et asters.\nLe jardin se trouve aux Pays-Bas.");
-        Console.WriteLine("A chaque mois passé, le jardin s'affiche en mode classique et un évènement arrive : bonnes fées (qui aident les plantes à fleurir, ou les rajeunit en augmentant leur score global), et les obstacles (qui diminuent leur score global, les amenant petit à petit vers la mort...)");
-        Console.WriteLine("A chaque tour, le jardinier peut effectuer 2 actions parmi semer une graine, arroser le terrain et cueillir une plante.");
-        Console.WriteLine("Il existe aussi des obstacles qui engendre un mode d'urgence ou il est possible de prendre des actions drastiques.\nBonne partie !");
+        Console.WriteLine("Bienvenue jeune jardinier!\n Le jardin suivant est composé de plusieurs type de terrains : des terrains argileux (1 et 2), sableux (3 et 4) et terreux (5 et 6) qui peuvent respectivement accueillir des tulipes, des jacinthes et asters.\nSouvenez-vous en bien !\nLe jardin se trouve aux Pays-Bas.");
+        Console.WriteLine("A chaque mois passé, le jardin s'affiche en mode classique et un évènement arrive : bonnes fées (qui aident les plantes à fleurir, ou les rajeunissent en augmentant leur score global), et les obstacles (qui diminuent leur score global, les amenant petit à petit vers la mort...)");
+        Console.WriteLine("A chaque tour, le jardinier peut effectuer 2 actions parmi semer une graine, arroser le terrain et cueillir une plante. Il peut aussi ne rien faire.");
+        Console.WriteLine("Vous avez un panier dans lequel seront rangées les plantes cueillies au meilleur de leur forme.\nAttention, si vous les cueillez trop tôt ou trop tard, elles ne seront pas comptabilisées.");
+        Console.WriteLine("Il existe aussi des obstacles qui engendre un mode d'urgence ou il est possible d'effectuer des actions drastiques.\nBonne partie !");
         for (int i = 1; i <= nbTours; i++)
         {
             Thread.Sleep(3000); //freeze de 2sec
@@ -47,6 +48,7 @@ public class Simulation
             }
 
             ChangerScore();
+            Console.WriteLine(modeEnCours);
 
         }
 

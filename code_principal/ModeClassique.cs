@@ -115,6 +115,7 @@ public class ModeClassique : Mode
         string stringNombre;
         int action;
         bool validation = true;
+        Plante? recolte;
         
         Console.WriteLine("Indiquez le numéro de l'action que vous souhaitez effectuer :");
         Console.WriteLine("0 : pas d'action");
@@ -159,7 +160,19 @@ public class ModeClassique : Mode
         if (action == 3)  //on récolte une seule plante, dans plante
         {
             Terrain terrainChoisi = ChoisirTerrain(terrains);
-            terrainChoisi.Cueillir();
+            recolte = terrainChoisi.Cueillir();
+            if (recolte is PlanteTulipe && recolte.etat==Plante.statutPlante.auTop)
+            {
+                tulipesCueillies += recolte.NbPousses;
+            }
+            else if (recolte is PlanteJacinthe && recolte.etat==Plante.statutPlante.auTop)
+            {
+                jacinthesCueillies += recolte.NbPousses;
+            }
+            else if (recolte is PlanteAster && recolte.etat==Plante.statutPlante.auTop)
+            {
+                astersCueillis += recolte.NbPousses;
+            }
 
         }
     }

@@ -1,8 +1,16 @@
-﻿//test instance tulipe
-//PlanteTulipe tulipe1 = new PlanteTulipe("première tulipe");
-//Console.WriteLine(t1);
+﻿// instanciation des terrains argileux
+TerrainArgile a1 = new TerrainArgile();  
+TerrainArgile a2 = new TerrainArgile();
 
-TerrainArgile t1 = new TerrainArgile();   //changer dans constructeur
-TerrainSable t2 = new TerrainSable();
-Simulation s1 = new Simulation(new List<Terrain> { t1, t2 });
-s1.Simuler(3);
+// instanciation des terrains sableux
+TerrainSable s1 = new TerrainSable();
+TerrainSable s2 = new TerrainSable();
+
+// instanciation des terrains terreux
+TerrainTerre t1 = new TerrainTerre();
+TerrainTerre t2 = new TerrainTerre();
+
+Simulation simu = new Simulation(new List<Terrain> { a1, a2, s1, s2, t1, t2 });
+
+//simulation de 36 tours (36 mois)
+simu.Simuler(36);
