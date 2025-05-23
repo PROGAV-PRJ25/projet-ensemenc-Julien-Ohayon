@@ -224,6 +224,7 @@ public abstract class Terrain
 
     public void Envoler()   //quand on a la tempête, on enlève une plante sur 2
     {
+        Console.WriteLine("Avec la tempête, 1/2 plante s'est déracinée ....");
         for (int i = Plants.Count - 1; i >= 0; i--) //on commence par le dernier élément de la liste car dans l'autre sens si des éléments s'enlèvent, les index changent et on peut oublier des éléments
         {
             if (i % 2 == 0)
@@ -235,6 +236,7 @@ public abstract class Terrain
 
     public void TomberMalade()  //obstacle d'urgence
     {
+        Console.WriteLine("Vos plantes, sont tombées malades... leur score de vie diminue");
         foreach (Plante p in Plants)
         {
             p.ScoreGlobal = p.ScoreGlobal - p.EsperanceVie * 1 / 3; // chaque plante perd 1/3 de son score global initial
@@ -243,6 +245,7 @@ public abstract class Terrain
 
     public void Reconstruire()  //action d'urgence
     {
+        Console.WriteLine("Grâce à cette action, vous pouvez replanter 3 plantes");
         for (int i = 0; i < 3; i++)     //on permet de planter 3 plantes 
         {
             Semer();
@@ -251,6 +254,7 @@ public abstract class Terrain
 
     public void DonnerPotion()  //action d'urgence
     {
+        Console.WriteLine("En donnant la potion, vos plantes regagnent de l'espérance de vie !");
         foreach (Plante p in Plants)
         {
             p.ScoreGlobal = p.ScoreGlobal + p.EsperanceVie * 1 / 4;     // la plante regagne 1/4 de son esperance de vie
@@ -271,7 +275,7 @@ public abstract class Terrain
     //méthode virtual des bonnes fees
     public virtual void Fleurir()
     {
-        Console.WriteLine("Grâce aux abeilles, votre terrain va fleurir");
+        Console.WriteLine("Grâce aux abeilles, tout votre terrain va fleurir !");
     }
 
 

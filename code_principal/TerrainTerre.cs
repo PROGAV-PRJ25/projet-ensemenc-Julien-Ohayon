@@ -17,17 +17,17 @@ public class TerrainTerre : Terrain
 
         Console.WriteLine("Vous allez choisir les coordonnées de votre aster, elle occupera 3 cases juxtaposées. Choisissez bien !");
         Console.WriteLine("Choisissez le numéro de la ligne de la 1e case sur laquelle vous souhaitez semer :");
-        ligne1 = EtreEntier(1, 9);
+        ligne1 = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la colonne de la 1e case sur laquelle vous souhaitez semer :");
-        colonne1 = EtreEntier(1, 9);
+        colonne1 = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la ligne de la 2e case sur laquelle vous souhaitez semer :");
-        ligne2 = EtreEntier(1, 9);
+        ligne2 = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la colonne de la 2e case sur laquelle vous souhaitez semer :");
-        colonne2 = EtreEntier(1, 9);
+        colonne2 = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la ligne de la 3e case sur laquelle vous souhaitez semer :");
-        ligne3 = EtreEntier(1, 9);
+        ligne3 = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la colonne de la 3e case sur laquelle vous souhaitez semer :");
-        colonne3 = EtreEntier(1, 9);
+        colonne3 = EtreEntier(1, Taille);
 
         int[] coord1 = new int[] { ligne1 - 1, colonne1 - 1 };   //tableau des coordonnées de la 1e case
         int[] coord2 = new int[] { ligne2 - 1, colonne2 - 1};   //tableau des coordonnées de la 2e case
