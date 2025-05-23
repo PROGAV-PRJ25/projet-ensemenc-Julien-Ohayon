@@ -46,7 +46,7 @@ public class ModeUrgence : Mode
         bool validation = true;
 
         Console.WriteLine("Indiquez le numéro de l'action que vous souhaitez effectuer :");
-        Console.WriteLine("1 : mettre une serre");
+        Console.WriteLine("1 : reconstruire");
         Console.WriteLine("2 : donner une potion magique");
         
         do  //test si le nombre est compris entre les valeurs souhaitées
