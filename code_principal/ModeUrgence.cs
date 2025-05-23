@@ -10,7 +10,7 @@ public class ModeUrgence : Mode
 
     public override void Simuler(List<Terrain> terrains)
     {
-        Console.WriteLine($"Mode Urgence");
+        Console.WriteLine($"Mode Urgence 🚨");
         Console.WriteLine($"Cause de l'urgence : {ObsBFActif}");
 
         Terrain terrainChoisi = ChoisirAleaTerrain(terrains);
@@ -78,8 +78,8 @@ public class ModeUrgence : Mode
 
         if (action == 1)   //on met une serre sur le terrain
         {
-            Console.WriteLine("Vous avez choisi de mettre une serre sur le terrain");
-            terrainChoisi.MettreSerre();   
+            Console.WriteLine("Vous avez choisi de replanter des plantes après la tempête");
+            terrainChoisi.Reconstruire();   
         }
 
 

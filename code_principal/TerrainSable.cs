@@ -17,29 +17,38 @@ public class TerrainSable : Terrain
 
         Console.WriteLine("Vous allez choisir les coordonnées de votre jacinthe, elle occupera 2 cases juxtaposées. Choisissez bien !");
         Console.WriteLine("Choisissez le numéro de la ligne de la 1e case sur laquelle vous souhaitez semer :");
-        ligne1 = EtreEntier(1,9);
+        ligne1 = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la colonne de la 1e case sur laquelle vous souhaitez semer :");
-        colonne1 = EtreEntier(1,9);
+        colonne1 = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la ligne de la 2e case sur laquelle vous souhaitez semer :");
-        ligne2 = EtreEntier(1,9);
+        ligne2 = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la colonne de la 2e case sur laquelle vous souhaitez semer :");
-        colonne2 = EtreEntier(1,9);
+        colonne2 = EtreEntier(1, Taille);
         //vérifier s'il y a la place de planter  et si les cases sont alignées -> if PouvoirPlanter(ligne,colonne)==true
-        int[] coord1 = new int [] {ligne1, colonne1};   //tableau des coordonnées de la 1e case
-        int[] coord2 = new int [] {ligne2, colonne2};   //tableau des coordonnées de la 2e case
-       
+        int[] coord1 = new int[] { ligne1 - 1, colonne1 - 1};   //tableau des coordonnées de la 1e case
+        int[] coord2 = new int[] { ligne2 - 1, colonne2 - 1};   //tableau des coordonnées de la 2e case
+
         List<int[]> casesChoisies = new List<int[]> { coord1, coord2 };
         if (VerifierAlign(casesChoisies) && PouvoirPlanter(casesChoisies))
         {
-            PlanteJacinthe jacinthe = new PlanteJacinthe(casesChoisies);   
-            Plants.Add(jacinthe);  
+            PlanteJacinthe jacinthe = new PlanteJacinthe(casesChoisies);
+            Plants.Add(jacinthe);
             Console.WriteLine("Vous avez planté une jacinthe !");
         }
         else
         {
             Console.WriteLine("Vous ne pouvez pas planter ici !");
-        }       
-                
+        }
+
+    }
+    
+    public override void Fleurir()
+    {
+        foreach (Plante p in Plants)
+        {
+            p.ScoreGlobal = 22;     // toutes les plantes passent au score hauut de "au top"
+        }
+        
     }
 
 }

@@ -62,8 +62,8 @@ public class ModeClassique : Mode
 
     public void Arroser(Terrain terrain)
     {
-        Console.WriteLine($"Le terrain {terrain.Numero} a été arrosé");
         terrain.EauTerrain += 5;
+        Console.WriteLine($"Le terrain {terrain.Numero} a été arrosé");
     }
 
     public Terrain ChoisirTerrain()
@@ -153,7 +153,8 @@ public class ModeClassique : Mode
 
         if (action == 2)   //on arrose tout un terrain (pour taux d'humidité), dans terrain
         {
-
+            Terrain terrainChoisi = ChoisirTerrain();
+            Arroser(terrainChoisi);
         }
 
         if (action == 3)  //on récolte une seule plante, dans plante
@@ -166,7 +167,6 @@ public class ModeClassique : Mode
 
     public override void Simuler(List<Terrain> terrains)
     {
-
         Console.WriteLine($"\nMode Classique - Mois : {Date}\n Météo : {Meteo}, Température : {Temperature}°C, Précipitation : {Precipitation}mm");
         ChoisirEvent(terrains);
         Console.WriteLine($"La bonne fée ou l'obstacle est :  {ObsBFActif}");
@@ -190,6 +190,7 @@ public class ModeClassique : Mode
     public void ChoisirEvent(List<Terrain> terrains)
     {
         Terrain terrainTrouve = ChoisirAleaTerrain(terrains);
+        Console.WriteLine($"Un évènement arrive sur votre terrain n°{terrainTrouve.Numero}");
 
 
         int x = rnd.Next(1, 8);      // choisir si c'est une bonne fée, obstacles ou obstacles d'urgence

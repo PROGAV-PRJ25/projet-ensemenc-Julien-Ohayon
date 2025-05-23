@@ -1,19 +1,19 @@
 public abstract class Terrain
 {
-    public double EauTerrain {get;set;}
-    public int Numero {get;}
+    public double EauTerrain { get; set; }
+    public int Numero { get; }
     private static int numeroSuivant = 1;
-    public List<Plante> Plants {get; set;}
+    public List<Plante> Plants { get; set; }
     public string[,] tableau;
     public int Taille { get; } = 5;
 
-    public Terrain ()
+    public Terrain()
     {
         Plants = new List<Plante>();
         tableau = new string[Taille, Taille];
         Numero = numeroSuivant;
         numeroSuivant++;
-        this.Plants=Plants;
+        this.Plants = Plants;
         for (int i = 0; i < Taille; i++)
         {
             for (int j = 0; j < Taille; j++)
@@ -36,17 +36,17 @@ public abstract class Terrain
             }
         }
     }
-    
+
 
     public void Afficher()
     {
         Actualiser();
-        Console.WriteLine($"\nTerrain : {Numero}\n");
+        Console.WriteLine($"\nTerrain : {Numero} - Pourcentage d'eau {EauTerrain}\n");
         for (int i = 0; i < Taille; i++)
         {
             for (int j = 0; j < Taille; j++)
             {
-                if (tableau[i, j] == "+" || tableau[i, j] == " ")
+                if (tableau[i, j] == "+")
                 {
                     Console.Write($" {tableau[i, j]} ");
                 }
@@ -128,7 +128,7 @@ public abstract class Terrain
     }
 
     //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison      
-    public bool PouvoirPlanter(List<int[]> cases)     
+    public bool PouvoirPlanter(List<int[]> cases)
     {
         bool planter = false;
         bool dispo = true;
@@ -229,25 +229,34 @@ public abstract class Terrain
         Plante? cueillette = null;
         Console.WriteLine("Vous allez choisir les coordonnées de la plante que vous souhaitez cueillir.\nSi elle est plantée sur plusieurs cases, entrez les coordonnées d'une seule case, elle sera enlevée partout.");
         Console.WriteLine("Choisissez le numéro de la ligne sur laquelle vous souhaitez cueillir :");
-        ligne = EtreEntier(1, 9);
+        ligne = EtreEntier(1, Taille);
         Console.WriteLine("Choisissez le numéro de la colonne sur laquelle vous souhaitez cueillir :");
-        colonne = EtreEntier(1, 9);
+        colonne = EtreEntier(1, Taille);
 
-        int[] coord = new int[] { ligne, colonne };
+        int[] coord = new int[] { ligne - 1, colonne - 1};
 
         foreach (Plante plante in Plants)      //on regarde chaque plante du terrain
         {
             //si on la trouve, il n'y en a qu'une sur cette case donc on l'enlève et on la retourne pour la mettre dans un panier
-            if (plante.CoordPlante.Contains(coord))
+            //if (plante.CoordPlante.Contains(coord))
+            if (plante.CoordPlante.Any(c => c[0] == coord[0] && c[1] == coord[1]))
             {
-                EnleverPlante(plante);
                 cueillette = plante;
-                Console.WriteLine("La plante a été cueillie !");
             }
-            else    //si on a rien trouvé, c'est qu'il n'y a pas de plante sur cette case
+            /*else    //si on a rien trouvé, c'est qu'il n'y a pas de plante sur cette case
             {
                 Console.WriteLine("Il n'y a pas de plante sur cette case");
-            }
+            }*/
+
+        }
+        if (cueillette == null)
+        {
+            Console.WriteLine("Pas de plante sur cette case...");
+        }
+        else    //cueilette est forcément pas null car sinon, cueillie est false
+        {
+            EnleverPlante(cueillette);
+            Console.WriteLine("La plante a été cueillie !");
         }
 
         return cueillette;
@@ -256,14 +265,12 @@ public abstract class Terrain
 
     public void Envoler()
     {
-        int i = 0;
-        foreach (Plante p in Plants)
+        for (int i = Plants.Count - 1; i >= 0; i--)
         {
             if (i % 2 == 0)
             {
-                //EnleverPlante(p);
+                EnleverPlante(Plants[i]);
             }
-            i++;
         }
     }
 
@@ -271,28 +278,39 @@ public abstract class Terrain
     {
         foreach (Plante p in Plants)
         {
-            p.ScoreGlobal = p.ScoreGlobal - 0.25 * p.EsperanceVie;
+            p.ScoreGlobal = p.ScoreGlobal - p.EsperanceVie * 1 / 3;
         }
     }
 
-    public void MettreSerre()
+    public void Reconstruire()
     {
-        //action à faire
+        for (int i = 0; i < 4; i++)
+        {
+            Semer();
+        }
     }
 
     public void DonnerPotion()
     {
-
+        foreach (Plante p in Plants)
+        {
+            p.ScoreGlobal = p.ScoreGlobal + p.EsperanceVie * 1 / 4;
+        }
     }
 
     public void Fertiliser()
     {
-        Console.WriteLine("Grâce aux vers de terre, votre terrain va être fertilisé !");
+        Console.WriteLine("Grâce aux vers de terre, votre terrain va être fertilisé et vos plantes rajeunissent !");
+        foreach (Plante p in Plants)
+        {
+            p.ScoreGlobal = p.ScoreGlobal + p.EsperanceVie * 1 / 6;
+        }
+
     }
 
 
     //fonctions abstract des bonnes fees
-    public void Fleurir()
+    public virtual void Fleurir()
     {
         Console.WriteLine("Grâce aux abeilles, votre terrain va fleurir");
     }
@@ -302,14 +320,25 @@ public abstract class Terrain
     public void DetruirePlante()
     {
         Console.WriteLine("A cause de piétineurs, une partie de vos plantes sont écrasées...");
-        //faire un random sur la liste de plante et supprimer plus ou moins de plantes
+        for (int i = Plants.Count - 1; i >= 0; i--)
+        {
+            if (i % 4 == 0)
+            {
+                EnleverPlante(Plants[i]);
+            }
+        }
     }
-
 
     public void MangerGraine()
     {
-        Console.WriteLine("A cause des oiseaux, votre terrain a été dérangé...");
-        //manger les plantes qui viennent d'être semées le mois dernier
+        Console.WriteLine("Les oiseaux ont mangé toutes les graines de votre terrain :/ ...");
+        for (int i = Plants.Count - 1; i >=0;i--)
+        {
+            if (Plants[i].etat == Plante.statutPlante.graine)
+            {
+                EnleverPlante(Plants[i]);
+            }
+        }
     }
 
 }

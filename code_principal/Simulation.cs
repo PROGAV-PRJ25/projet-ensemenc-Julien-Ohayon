@@ -21,10 +21,13 @@ public class Simulation
 
     public void Simuler(int nbTours)
     {
-        Console.WriteLine("Consignes blablabla, début simu");
-
+        Console.WriteLine("Bienvenue jeune jardinier!\n Le jardin suivant est composé de plusieurs type de terrains : des terrains argileux, sableux et terreux qui peuvent respectivement accueillir des tulipes, des jacinthes et asters.\nLe jardin se trouve aux Pays-Bas.");
+        Console.WriteLine("A chaque mois passé, un évènement arrive : bonnes fées (qui aident les plantes à fleurir, ou les rajeunit en augmentant leur score global), et les obstacles (qui diminuent leur score global, les amenant petit à petit vers la mort...)");
+        Console.WriteLine("Il existe au ")
         for (int i = 1; i <= nbTours; i++)
         {
+            Thread.Sleep(3000); //freeze de 2sec
+            Console.Clear();
             Console.WriteLine($"Tours n°{i}");
             if (modeEnCours is ModeClassique mc) //?    //sinon on ne peut pas appeler mode classique comme on aurait pu etre en mode urgence 
             {

@@ -1,6 +1,6 @@
 public abstract class Plante
 {
-        public List<int[]> CoordPlante { get; set; }
+    public List<int[]> CoordPlante { get; set; }
     public string Affichage { get; set; }
     public string Nature { get; set; }     // anuelle ou vivace
     public string Saison {get;set;}     //de semis
