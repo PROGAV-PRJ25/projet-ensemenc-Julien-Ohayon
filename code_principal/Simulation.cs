@@ -12,10 +12,10 @@ public class Simulation
 
     private Mode modeEnCours;
     
-    private List<Terrain> Terrains {get;set;}
-    public Simulation (List<Terrain> Terrains)
+    public static List<Terrain> Terrains {get;private set;}
+    public Simulation (List<Terrain> terrains)
     {
-        this.Terrains=Terrains;
+        Terrains=terrains;
         modeEnCours=modeDispo.GetValueOrDefault("Classique") ?? new ModeClassique();
     } 
 

@@ -2,6 +2,7 @@ public class PlanteAster : Plante
 {
     public PlanteAster(List<int[]> coord) : base(coord)
     {
+
         this.Nature = "annuelle";
         this.Saison = "printemps";
         this.TerrainPref = "terre";

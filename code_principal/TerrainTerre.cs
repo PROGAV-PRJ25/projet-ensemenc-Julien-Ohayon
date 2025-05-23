@@ -15,7 +15,7 @@ public class TerrainTerre : Terrain
         int ligne3;
         int colonne3;
 
-        Console.WriteLine("Vous allez choisir les coordonnées de votre plante, elle occupera 3 cases juxtaposées. Choisissez bien !");
+        Console.WriteLine("Vous allez choisir les coordonnées de votre aster, elle occupera 3 cases juxtaposées. Choisissez bien !");
         Console.WriteLine("Choisissez le numéro de la ligne de la 1e case sur laquelle vous souhaitez semer :");
         ligne1 = EtreEntier(1,9);
         Console.WriteLine("Choisissez le numéro de la colonne de la 1e case sur laquelle vous souhaitez semer :");
@@ -34,7 +34,16 @@ public class TerrainTerre : Terrain
         int[] coord2 = new int [] {ligne2, colonne2};   //tableau des coordonnées de la 2e case
         int[] coord3 = new int [] {ligne3, colonne3};   //tableau des coordonnées de la 3e case
 
-        PlanteAster aster = new PlanteAster(new List<int[]> {coord1, coord2,coord3});     //voir comment on les cueille car est sur plusieurs cases
+        List<int[]> casesChoisies = new List<int[]> { coord1, coord2, coord3 };
+        if (VerifierAlign(casesChoisies) && PouvoirPlanter(casesChoisies))
+        {
+            PlanteAster aster = new PlanteAster(casesChoisies);
+            Console.WriteLine("Vous avez planté un aster !");
+        }
+        else
+        {
+            Console.WriteLine("Vous ne pouvez pas planter ici !");
+        }
                 
     }
 }

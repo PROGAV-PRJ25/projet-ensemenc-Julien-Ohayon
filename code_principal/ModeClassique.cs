@@ -66,9 +66,49 @@ public class ModeClassique : Mode
         terrain.EauTerrain += 5;
     }
 
+    public Terrain ChoisirTerrain()
+    {
+        bool terrainOk = false;
+        string strNumTerrain;
+        int numTerrain;
+        bool trouve = true;
+        Terrain? choisi = null;
+
+        Console.WriteLine("Choisissez le numéro du terrain sur lequel vous souhaitez effectuer l'action :"); //afficher les numéros afficher, correspond au Numéro du terrain
+
+        do  //test si le nombre est compris entre les valeurs souhaitées
+        {
+            do  //test si l'utilisateur entre un entier
+            {
+                if (trouve == false)
+                {
+                    Console.WriteLine("Erreur : réessayez");
+                }
+
+                strNumTerrain = Console.ReadLine()!;
+                terrainOk = int.TryParse(strNumTerrain, out int numericValue);
+                trouve = false;
+
+            } while (terrainOk == false);
+
+            numTerrain = Convert.ToInt32(strNumTerrain);
+
+        } while (numTerrain < 1 || numTerrain > 3);     //adapter les chiffres selon nos terrains
+
+        //grâce aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
+        foreach (Terrain elem in Simulation.Terrains)
+        {
+            if (elem.Numero == numTerrain)
+            {
+                choisi = elem;
+            }
+        }
+        return choisi;
+    }
+
     public void AfficherAction(List<Terrain> terrains)    //le joueur peut faire 2 actions max, à vérifier dans la simulation sauf si le résultat de la 1e est 0
     {
-        
+
         bool nombreOk = false;
         string stringNombre;
         int action;
@@ -79,81 +119,49 @@ public class ModeClassique : Mode
         Console.WriteLine("1 : semer");
         Console.WriteLine("2 : arroser");
         Console.WriteLine("3 : récolter");
-        
+
         do  //test si le nombre est compris entre les valeurs souhaitées
         {
             do  //test si l'utilisateur entre un entier
             {
-            if (validation == false)
-            {
-                Console.WriteLine("Erreur : réessayez");
-            } 
-            stringNombre = Console.ReadLine()!;
-            nombreOk = int.TryParse(stringNombre, out int numericValue);
-            validation = false;
+                if (validation == false)
+                {
+                    Console.WriteLine("Erreur : réessayez");
+                }
+                stringNombre = Console.ReadLine()!;
+                nombreOk = int.TryParse(stringNombre, out int numericValue);
+                validation = false;
             } while (nombreOk == false);
 
-        action = Convert.ToInt32(stringNombre);
+            action = Convert.ToInt32(stringNombre);
 
-        } while (action<0 || action>3);
+        } while (action < 0 || action > 3);
 
-        if(action==0)   //on ne fait rien
+        if (action == 0)   //on ne fait rien
         {
 
         }
-        
-        if(action==1)   //on sème une plante sur un terrain
-        {
-            bool terrainOk = false;
-            string strNumTerrain;
-            int numTerrain;
-            bool trouve = true;
-            Terrain choisi;
 
+        if (action == 1)   //on sème une plante sur un terrain
+        {
             //afficher quelle plante peut être plantée où
-            //si on fait d'autres plantes, demander laquelle planter, puis adapter les override de semer
-            Console.WriteLine("Choisissez le numéro du terrain sur lequel vous souhaitez semer :"); //à afficher, correspond au Numéro du terrain
-
-            do  //test si le nombre est compris entre les valeurs souhaitées
-            {
-                do  //test si l'utilisateur entre un entier
-                {
-                    if (trouve == false)
-                    {
-                        Console.WriteLine("Erreur : réessayez");
-                    }
-
-                    strNumTerrain = Console.ReadLine()!;
-                    terrainOk = int.TryParse(strNumTerrain, out int numericValue);
-                    trouve = false;
-
-                } while (terrainOk == false);
-
-                numTerrain = Convert.ToInt32(strNumTerrain);
-
-            } while (numTerrain<1 || numTerrain>3 );     //adapter les chiffres selon la taille de nos terrains
-            
-            foreach (Terrain elem in terrains)      //grâce aux vérifications ci-dessus, un terrain correspondra forcément et il sera unique
-            {
-                if (elem.Numero==numTerrain)
-                {
-                    choisi = elem;
-                    choisi.Semer();
-                }            
-            }
+            Terrain terrainChoisi = ChoisirTerrain();
+            //grâce aux vérifications de ChoisirTerrain, un terrain correspondra forcément et il sera unique
+            terrainChoisi.Semer();
         }
 
 
-        if(action==2)   //on arrose tout un terrain (pour taux d'humidité), dans terrain
+        if (action == 2)   //on arrose tout un terrain (pour taux d'humidité), dans terrain
         {
 
         }
-        
-        if (action==3)  //on récolte une seule plante, dans plante
+
+        if (action == 3)  //on récolte une seule plante, dans plante
         {
+            Terrain terrainChoisi = ChoisirTerrain();
+            terrainChoisi.Cueillir();
 
         }
-        //afficher l'action choisie, et l'appeler 
     }
 
     public override void Simuler(List<Terrain> terrains)

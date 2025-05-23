@@ -125,7 +125,7 @@ public abstract class Terrain
     }
 
     //vérifie qu'il y a assez de place pour planter sur la case sélectionnée par le joueur, et qu'on est à la bonne saison      
-    public bool PouvoirPlanter(List<int[]> cases)      //fonction à déplacer dans terrain
+    public bool PouvoirPlanter(List<int[]> cases)     
     {
         bool planter = false;
         bool dispo = true;
@@ -143,7 +143,6 @@ public abstract class Terrain
                 dispo = false;
             }
 
-            //si dispo false, pas besoin de regarder l'espacement : soit on parcourt une fois la liste, soit 2
 
             //on regarde si la case en dessous existe, puis si elle est libre 
             if (elem[0] + Plante.espacement < Taille)
@@ -182,8 +181,6 @@ public abstract class Terrain
             }
         }
 
-        //pour voir si elles sont bien côte à côte, on regarde si toutes les lignes ou (exclusif) toutes les colonnes sont les mêmes et si leurs numéros se suivent
-
         if (dispo && espaceHaut && espaceBas && espaceGauche && espaceDroite) //on plante si la place requise et l'espacement sont vérifiés
         {
             planter = true;
@@ -211,6 +208,48 @@ public abstract class Terrain
         return alignees;
     }
     public abstract void Semer();
+
+    public void EnleverPlante(Plante plante)
+    {
+        foreach (int[] coord in plante.CoordPlante)
+        {
+            tableau[coord[0], coord[1]] = "+";  //on remet un + dans chaque case occupée par la plante
+        }
+        Plants.Remove(plante);
+
+    }
+
+    public Plante Cueillir()
+    {
+        int ligne;
+        int colonne;
+        Plante? cueillette = null;
+        Console.WriteLine("Vous allez choisir les coordonnées de la plante que vous souhaitez cueillir.\nSi elle est plantée sur plusieurs cases, entrez les coordonnées d'une seule case, elle sera enlevée partout.");
+        Console.WriteLine("Choisissez le numéro de la ligne sur laquelle vous souhaitez cueillir :");
+        ligne = EtreEntier(1, 9);
+        Console.WriteLine("Choisissez le numéro de la colonne sur laquelle vous souhaitez cueillir :");
+        colonne = EtreEntier(1, 9);
+
+        int[] coord = new int[] { ligne, colonne };
+
+        foreach (Plante plante in Plants)      //on reagrde chaque plante du terrain
+        {
+            //si on la trouve, il n'y en a qu'une sur cette case donc on l'enlève et on la retourne pour la mettre dans un panier
+            if (plante.CoordPlante.Contains(coord))
+            {
+                EnleverPlante(plante);
+                cueillette = plante;
+                Console.WriteLine("La plante a été cueillie !");
+            }
+            else    //si on a rien trouvé, c'est qu'il n'y a pas de plante sur cette case
+            {
+                Console.WriteLine("Il n'y a pas de plante sur cette case");
+            }
+        }
+
+        return cueillette;
+
+    }
 
     public void Envoler()
     {
