@@ -16,11 +16,11 @@ public abstract class Plante
     public int EsperanceVie {get;set;}  //du plant, en années
     public int NbPousses {get;set;}
 
-    public int ScoreGlobal { get; set; }     
+    public double ScoreGlobal { get; set; }     
     public int MoisRestant { get; set; }
-    protected enum statutPlante
+    public enum statutPlante
     {
-        graine, jeunePousse, auTop, mourrante
+        graine, jeunePousse, auTop, mourrante, morte
     }
 
     public statutPlante etat = statutPlante.graine;     //toujours une graine au début
@@ -40,10 +40,11 @@ public abstract class Plante
     //public Carotte (string nom) : base (nom, string saison="hiver"...) { }
 
     //tulipes jacinthes asters
+    public abstract void ChangerEtat();
 
     public override string ToString()
     {
-        string message = base.ToString()+$"\nNom : {Nature}\n";
+        string message = base.ToString() + $"\nNom : {Nature}\n";
         message += $"Saison : {Saison}\n";
         message += $"Terrain préféré : {TerrainPref}\n";
         message += $"Espacement : {espacement}\n";
@@ -59,7 +60,7 @@ public abstract class Plante
         }
         message += $"\nEspérance de vie : {EsperanceVie} an(s)\n";
         message += $"Nombre de fleur(s) par plant : {NbPousses}\n";
-       
+
         return message;
     }
 }

@@ -17,8 +17,33 @@ public class PlanteTulipe : Plante
 
     }
 
+    public override void ChangerEtat()
+    {
+        if (ScoreGlobal == 0)
+        {
+            this.etat = statutPlante.morte;
+            //Enlever plante la fonction 
+        }
+        else if (ScoreGlobal < 13)
+        {
+            this.etat = statutPlante.mourrante;
+        }
+        else if (ScoreGlobal < 38)
+        {
+            this.etat = statutPlante.auTop;
+        }
+        else if (ScoreGlobal < 53)
+        {
+            this.etat = statutPlante.jeunePousse;
+        }
+        else
+        {
+            this.etat = statutPlante.graine;
+        }        
+    }
     public override void ChangerAffichage()
     {
+        ChangerEtat();
         if (this.etat == statutPlante.graine)
         {
             Affichage = "🟢";

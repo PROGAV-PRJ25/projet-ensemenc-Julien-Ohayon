@@ -25,11 +25,11 @@ public class Simulation
 
         for (int i = 1; i <= nbTours; i++)
         {
-
             Console.WriteLine($"Tours n°{i}");
             if (modeEnCours is ModeClassique mc) //?    //sinon on ne peut pas appeler mode classique comme on aurait pu etre en mode urgence 
             {
                 mc.ChangerMeteo(i);
+                //Utiliser la fonction controler taux humidité
             }
 
             modeEnCours.Simuler(Terrains);
