@@ -62,7 +62,7 @@ public class ModeClassique : Mode
 
     public void Arroser(Terrain terrain)
     {
-        Console.WriteLine($"Le terrain {terrain} a été arrosé");
+        Console.WriteLine($"Le terrain {terrain.Numero} a été arrosé");
         terrain.EauTerrain += 5;
     }
 
@@ -95,7 +95,7 @@ public class ModeClassique : Mode
 
         action = Convert.ToInt32(stringNombre);
 
-        } while (action<1 || action>3);
+        } while (action<0 || action>3);
 
         if(action==0)   //on ne fait rien
         {
